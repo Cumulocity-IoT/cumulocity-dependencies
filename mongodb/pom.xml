@@ -37,6 +37,11 @@
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
+            <artifactId>bson-record-codec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
             <artifactId>bson-kotlin</artifactId>
             <version>${mongodb-driver.version}</version>
             <scope>provided</scope>
@@ -116,13 +121,10 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <configuration>
                     <includeGroupIds>org.mongodb</includeGroupIds>
-                    <!-- add bson-record-codec during upgrade to Java 17 -->
-                    <includeArtifactIds>mongodb-driver-legacy, mongodb-driver-core, mongodb-driver-sync, bson
-                    </includeArtifactIds>
+                    <includeArtifactIds>mongodb-driver-legacy, mongodb-driver-core, mongodb-driver-sync, bson, bson-record-codec</includeArtifactIds>
                     <excludes>
                         META-INF/MANIFEST.MF,
-                        META-INF/maven/**/*,
-                        com/mongodb/Jep395RecordCodecProvider.*
+                        META-INF/maven/**/*
                     </excludes>
                 </configuration>
             </plugin>
