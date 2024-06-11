@@ -1,0 +1,7 @@
+.*
+.idea/
+target/
+bin/
+*.iml
+*.orig
+.flattened-pom.xml

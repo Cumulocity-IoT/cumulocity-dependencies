@@ -754,10 +754,9 @@
                     <version>3.2.1</version>
                     <executions>
                         <execution>
-                            <id>bundle-sources</id>
+                            <id>attach-sources</id>
                             <phase>package</phase>
                             <goals>
-                                <!-- produce source artifact for main project sources -->
                                 <goal>jar-no-fork</goal>
                             </goals>
                         </execution>
@@ -771,4 +770,20 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>pre-merge</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>pre-merge</id>
+                    <url>${nexus.url}${nexus.basePath}/pre-merge</url>
+                </snapshotRepository>
+                <repository>
+                    <id>pre-merge</id>
+                    <url>${nexus.url}${nexus.basePath}/pre-merge</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

@@ -1,0 +1,45 @@
+name: PreMerge
+
+on:
+  pull_request: #Pre merge cycle, triggered when a PR is created or updated
+
+permissions:
+  contents: read
+
+jobs:
+  MavenBuild:
+    runs-on: [cumulocity-dependencies]
+
+    env:
+      WORKSPACE: "${{ github.workspace }}"
+      MVN_SETTINGS: "${{ github.workspace }}/settings.xml"
+      MAVEN_PROFILES: "?ci,?pre-merge"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get PR number
+        id: pr_number
+        uses: kamatama41/get-pr-number-action@v0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Configure Maven
+        run: |
+          echo '${{ secrets.MAVEN_DEVELOPER_SETTINGS }}' > $MVN_SETTINGS
+
+      - name: Configure version
+        run: |
+          .github/scripts/mvn.sh -N -q -Dexec.executable='echo' exec:exec \
+           -Dexec.args='DEPENDENCIES_VERSION=${revision}-${{steps.pr_number.outputs.number}}.${{github.run_number}}.deps' >> "$GITHUB_ENV"
+
+      - name: Run Maven build
+        run: |
+          .github/scripts/mvn.sh install
