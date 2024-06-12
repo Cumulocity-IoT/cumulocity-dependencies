@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+        <artifactId>spring-dm</artifactId>
+        <version>${osgi.spring-dm.version}</version>
+    </parent>
+
+    <artifactId>spring-osgi-annotation</artifactId>
+    <name>Cumulocity :: Dependencies :: OSGi :: Spring DM Annotation</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+
+    <properties>
+        <spring.osgi.export.pkg>
+            org.springframework.osgi.extensions.annotation
+        </spring.osgi.export.pkg>
+
+        <spring.osgi.import.pkg>
+            org.apache.commons.logging
+        </spring.osgi.import.pkg>
+
+        <spring.osgi.symbolic.name>${symName.prefix}.extensions.annotations</spring.osgi.symbolic.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+            <artifactId>spring-osgi-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+            <artifactId>spring-osgi-extender</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifact>org.springframework.osgi:spring-osgi-annotation:${spring-dm.version}:jar:sources</artifact>
+                            <excludes>
+                                META-INF/MANIFEST.MF,
+                                META-INF/maven/**/*
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

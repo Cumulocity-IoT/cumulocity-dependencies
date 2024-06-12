@@ -1,0 +1,105 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies</groupId>
+        <artifactId>cumulocity-dependencies</artifactId>
+        <version>${cumulocity-dependencies.version}</version>
+    </parent>
+
+    <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+    <artifactId>moquette-dependencies</artifactId>
+    <version>${osgi.moquette.version}</version>
+    <name>Cumulocity :: Dependencies :: OSGi :: Moquette</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hdrhistogram</groupId>
+            <artifactId>HdrHistogram</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>add-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeGroupIds>
+                        io.moquette,
+                        org.hdrhistogram,
+                        commons-codec
+                    </includeGroupIds>
+                    <includeArtifactIds>
+                        moquette-netty-parser,
+                        moquette-parser-commons,
+                        HdrHistogram,
+                        commons-codec
+                    </includeArtifactIds>
+                    <excludes>
+                        META-INF/MANIFEST.MF,
+                        META-INF/maven/**/*,
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <skipMain>false</skipMain>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            io.moquette.*,
+                            io.moquette.proto.*,
+                            io.moquette.spi.*,
+                            io.moquette.commons.*,
+                            org.HdrHistogram.*
+                        </Export-Package>
+                        <Import-Package>
+                            !io.moquette.*,
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies</groupId>
+        <artifactId>cumulocity-dependencies</artifactId>
+        <version>${cumulocity-dependencies.version}</version>
+    </parent>
+
+    <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+    <artifactId>json-smart</artifactId>
+    <version>${osgi.json-smart.version}</version>
+    <name>Cumulocity :: Dependencies :: OSGi :: JsonSmart</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>asm</groupId>
+                    <artifactId>asm</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.ow2.asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>9.4</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeGroupIds>net.minidev</includeGroupIds>
+                    <includeArtifactIds>json-smart,asm</includeArtifactIds>
+                    <excludes>
+                        META-INF/MANIFEST.MF,
+                        META-INF/maven/**/*,
+                        org/objectweb/asm/*
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

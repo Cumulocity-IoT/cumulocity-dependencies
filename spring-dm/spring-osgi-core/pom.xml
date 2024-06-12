@@ -1,0 +1,141 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+        <artifactId>spring-dm</artifactId>
+        <version>${osgi.spring-dm.version}</version>
+    </parent>
+
+    <artifactId>spring-osgi-core</artifactId>
+    <name>Cumulocity :: Dependencies :: OSGi :: Spring DM Core</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+
+    <properties>
+        <spring.osgi.export>
+            !org.springframework.beans*,
+            org.springframework.core.enums*;version=${spring.version},
+            !org.springframework.osgi.io*,
+            !org.springframework.osgi.*internal*,
+            org.springframework.osgi*
+        </spring.osgi.export>
+
+        <spring.osgi.import.pkg>
+            !org.springframework.core.enums*,
+            !org.springframework.osgi,
+            !org.springframework.osgi.bundle*,
+            !org.springframework.osgi.compendium*,
+            !org.springframework.osgi.config*,
+            !org.springframework.osgi.context*,
+            !org.springframework.osgi.service*,
+            !org.springframework.osgi.util*,
+            org.aopalliance*;version="0.0.0",
+            org.springframework.aop;version=${spring.version.range},
+            org.springframework.beans.factory.config;version=${spring.version.range},
+            org.springframework.beans.propertyeditors;version=${spring.version.range},
+            org.osgi.service.cm;version=1.2;resolution:=optional,
+            org.osgi.service.startlevel;version=1.0;resolution:=optional
+        </spring.osgi.import.pkg>
+
+        <spring.osgi.symbolic.name>${symName.prefix}.core</spring.osgi.symbolic.name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+            <artifactId>spring-osgi-io</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi_R4_compendium</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+	
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifact>org.springframework.osgi:spring-osgi-core:${spring-dm.version}:jar:sources</artifact>
+                            <excludes>
+                                META-INF/MANIFEST.MF,
+                                META-INF/maven/**/*,
+                                org/springframework/osgi/compendium/internal/cm/ConfigurationAdminManager*,
+                                org/springframework/osgi/compendium/internal/cm/ManagedServiceInstanceTrackerPostProcessor*,
+                                org/springframework/osgi/config/internal/util/MethodUtils*,
+                                org/springframework/osgi/config/internal/util/StandardAttributeCallback*,
+                                org/springframework/osgi/context/support/OsgiBundleXmlApplicationContext*,
+                                org/springframework/osgi/service/dependency/internal/MandatoryDependencyBeanPostProcessor*,
+                                org/springframework/osgi/service/importer/support/internal/aop/BaseServiceReferenceProxy*,
+                                org/springframework/osgi/service/importer/support/internal/aop/ServiceDynamicInterceptor*,
+                                org/springframework/osgi/service/importer/support/internal/aop/StaticServiceReferenceProxy*,
+                                org/springframework/osgi/service/importer/support/internal/aop/SwappingServiceReferenceProxy*,
+                                org/springframework/osgi/util/OsgiStringUtils*,
+                                org/springframework/osgi/util/internal/ClassUtils*
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>java-util-concurrent</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replace dir="${unpack.source.directory}">
+                                    <include name="**/*.java"/>
+                                    <replacefilter token="org.springframework.core.ConcurrentMap"
+                                                   value="java.util.concurrent.ConcurrentMap" />
+                                    <replacefilter token="org.springframework.core.CollectionFactory"
+                                                   value="java.util.concurrent.ConcurrentHashMap" />
+                                    <replacefilter token="CollectionFactory.createConcurrentMap"
+                                                   value="new ConcurrentHashMap" />
+                                </replace>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Unversioned-Imports>*</Unversioned-Imports>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

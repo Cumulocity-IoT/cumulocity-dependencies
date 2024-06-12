@@ -1,0 +1,67 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies</groupId>
+        <artifactId>cumulocity-dependencies</artifactId>
+        <version>${cumulocity-dependencies.version}</version>
+    </parent>
+
+    <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+    <artifactId>sslcontext</artifactId>
+    <version>${osgi.sslcontext.version}</version>
+    <name>Cumulocity :: Dependencies :: OSGi :: SSLContext</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>sslcontext-kickstart</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hakky54</groupId>
+            <artifactId>sslcontext-kickstart-for-pem</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeGroupIds>io.github.hakky54</includeGroupIds>
+                    <excludes>
+                        META-INF/MANIFEST.MF,
+                        META-INF/maven/**/*,
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Export-Package>
+                            nl.altindag.ssl.*
+                        </Export-Package>
+                        <Import-Package>
+                            !nl.altindag.ssl.*,
+                            javax.net.ssl,
+                            javax.security.auth.x500,
+                            org.bouncycastle.pkcs;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.cert;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.openssl;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.operator;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.jce.provider;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.cert.jcajce;version="[1.65.0,2.0.0)",
+                            org.bouncycastle.openssl.jcajce;version="[1.65.0,2.0.0)",
+                            org.slf4j
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

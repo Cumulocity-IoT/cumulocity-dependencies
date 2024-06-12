@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies</groupId>
+        <artifactId>cumulocity-dependencies</artifactId>
+        <version>${cumulocity-dependencies.version}</version>
+    </parent>
+
+    <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+    <artifactId>jackson-module-jsonSchema</artifactId>
+    <packaging>bundle</packaging>
+    <version>${osgi.jackson.version}</version>
+    <name>Cumulocity :: Dependencies :: OSGi :: Jackson Module JSON Schema</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+
+    <!--
+        NOTE: Bundle `jackson-module-jsonSchema` is a dependency to `pulsar-client` bundle. We're overwriting it
+        because it imports `javax.validation.constraints` packages in version 1.1.0 which conflicts
+        with javax.validation version 1.0.0 we're using otherwise. Thankfully `jackson-module-jsonSchema` bundle
+        uses `javax.validation` packages only in tests, so we can just remove this import.
+    -->
+
+    <properties>
+        <osgi.export>${osgi.export.pkg}*;version=${jackson.version};-split-package:=merge-first</osgi.export>
+        <osgi.export.pkg>
+            com.fasterxml.jackson.module.jsonSchema,
+            com.fasterxml.jackson.module.jsonSchema.*
+        </osgi.export.pkg>
+        <osgi.import.pkg>
+            !javax.validation.constraints,
+            *
+        </osgi.import.pkg>
+        <osgi.private.pkg/>
+        <osgi.dynamicimport.pkg/>
+        <osgi.failok>false</osgi.failok>
+        <osgi.embed.dependency/>
+        <osgi.fragment.host/>
+        <osgi.activator/>
+        <osgi.provide.capability/>
+        <osgi.require.capability/>
+        <spi.provider/>
+        <spi.consumer/>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jsonSchema</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeGroupIds>com.fasterxml.jackson.module</includeGroupIds>
+                    <includeArtifactIds>jackson-module-jsonSchema</includeArtifactIds>
+                    <excludes>
+                        META-INF/MANIFEST.MF,
+                        META-INF/maven,
+                        META-INF/maven/**/*
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Description>${project.name}</Bundle-Description>
+                        <Export-Package>${osgi.export}</Export-Package>
+                        <Import-Package>${osgi.import.pkg}</Import-Package>
+                        <Private-Package>${osgi.private.pkg}</Private-Package>
+                        <DynamicImport-Package>${osgi.dynamicimport.pkg}</DynamicImport-Package>
+                        <Embed-Dependency>${osgi.embed.dependency}</Embed-Dependency>
+                        <!-- <Bundle-NativeCode>${osgi.native}</Bundle-NativeCode> -->
+                        <Bundle-Activator>${osgi.activator}</Bundle-Activator>
+                        <Fragment-Host>${osgi.fragment.host}</Fragment-Host>
+                        <Provide-Capability>${osgi.provide.capability}</Provide-Capability>
+                        <Require-Capability>${osgi.require.capability}</Require-Capability>
+                        <SPI-Provider>${spi.provider}</SPI-Provider>
+                        <SPI-Consumer>${spi.consumer}</SPI-Consumer>
+                        <_failok>${osgi.failok}</_failok>
+                        <_versionpolicy>[$(version;==;$(@)),$(version;+;$(@)))</_versionpolicy>
+                        <_removeheaders>Ignore-Package,Include-Resource,Private-Package,Embed-Dependency
+                        </_removeheaders>
+                    </instructions>
+                    <unpackBundle>true</unpackBundle>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
