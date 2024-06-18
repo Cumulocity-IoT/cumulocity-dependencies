@@ -38,7 +38,8 @@ jobs:
       - name: Configure version
         run: |
           .github/scripts/mvn.sh -N -q -Dexec.executable='echo' exec:exec \
-           -Dexec.args='DEPENDENCIES_VERSION=${revision}-${{steps.pr_number.outputs.number}}.${{github.run_number}}.deps' >> "$GITHUB_ENV"
+            -Dexec.args='VERSION=${revision}' >> "$GITHUB_ENV"
+          echo 'CHANGE_VERSION=.${{steps.pr_number.outputs.number}}.${{github.run_number}}.deps' >> "$GITHUB_ENV" 
 
       - name: Run Maven build
         run: |

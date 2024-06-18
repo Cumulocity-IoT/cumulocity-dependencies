@@ -5,7 +5,7 @@
     <groupId>com.nsn.cumulocity.dependencies</groupId>
     <artifactId>cumulocity-dependencies</artifactId>
     <packaging>pom</packaging>
-    <version>${cumulocity-dependencies.version}</version>
+    <version>${revision}${changelist}</version>
     <name>Cumulocity :: Dependencies</name>
 
     <organization>
@@ -34,9 +34,9 @@
     </modules>
 
     <properties>
+        <!-- https://maven.apache.org/maven-ci-friendly.html -->
         <revision>1020.429.0</revision>
         <changelist>-SNAPSHOT</changelist>
-        <cumulocity-dependencies.version>${revision}${changelist}</cumulocity-dependencies.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -97,22 +97,22 @@
         <lombok.version>1.18.24</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
-        <osgi.cglib-nodep.version>${cglib-nodep.version}-${cumulocity-dependencies.version}</osgi.cglib-nodep.version>
-        <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
-        <osgi.commons-configuration.version>${commons-configuration.version}-${cumulocity-dependencies.version}</osgi.commons-configuration.version>
-        <osgi.jackson.version>${jackson.version}-${cumulocity-dependencies.version}</osgi.jackson.version>
-        <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
-        <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
-        <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
-        <osgi.logbook.version>${logbook.version}-${cumulocity-dependencies.version}</osgi.logbook.version>
-        <osgi.mongodb-driver.version>${mongodb-driver.version}-${cumulocity-dependencies.version}</osgi.mongodb-driver.version>
-        <osgi.moquette.version>${moquette.version}-${cumulocity-dependencies.version}</osgi.moquette.version>
-        <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
-        <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
-        <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
-        <osgi.sslcontext.version>${sslcontext.version}-${cumulocity-dependencies.version}</osgi.sslcontext.version>
-        <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
-        <osgi.uom.version>${uom.version}-${cumulocity-dependencies.version}</osgi.uom.version>
+        <osgi.cglib-nodep.version>${cglib-nodep.version}-${revision}${changelist}</osgi.cglib-nodep.version>
+        <osgi.cometd.version>${cometd.version}-${revision}${changelist}</osgi.cometd.version>
+        <osgi.commons-configuration.version>${commons-configuration.version}-${revision}${changelist}</osgi.commons-configuration.version>
+        <osgi.jackson.version>${jackson.version}-${revision}${changelist}</osgi.jackson.version>
+        <osgi.json-path.version>${json-path.version}-${revision}${changelist}</osgi.json-path.version>
+        <osgi.json-smart.version>${json-smart.version}-${revision}${changelist}</osgi.json-smart.version>
+        <osgi.kubernetes-client.version>${kubernetes-client.version}-${revision}${changelist}</osgi.kubernetes-client.version>
+        <osgi.logbook.version>${logbook.version}-${revision}${changelist}</osgi.logbook.version>
+        <osgi.mongodb-driver.version>${mongodb-driver.version}-${revision}${changelist}</osgi.mongodb-driver.version>
+        <osgi.moquette.version>${moquette.version}-${revision}${changelist}</osgi.moquette.version>
+        <osgi.odata.version>${odata.version}-${revision}${changelist}</osgi.odata.version>
+        <osgi.pulsar-client.version>${pulsar-client.version}-${revision}${changelist}</osgi.pulsar-client.version>
+        <osgi.spring-dm.version>${spring-dm.version}-${revision}${changelist}</osgi.spring-dm.version>
+        <osgi.sslcontext.version>${sslcontext.version}-${revision}${changelist}</osgi.sslcontext.version>
+        <osgi.svenson.version>${svenson.version}-${revision}${changelist}</osgi.svenson.version>
+        <osgi.uom.version>${uom.version}-${revision}${changelist}</osgi.uom.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
         <assertj.version>3.16.1</assertj.version>
@@ -689,6 +689,10 @@
 
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
             </plugin>
@@ -740,8 +744,34 @@
             <plugins>
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                    <configuration>
+                        <updatePomFile>true</updatePomFile>
+                        <!-- https://maven.apache.org/maven-ci-friendly.html -->
+                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>flatten.clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
                     <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.6.0</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
@@ -765,12 +795,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.3.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
+                    <version>3.13.0</version>
                     <configuration>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
@@ -779,17 +809,17 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>3.5.0</version>
+                    <version>3.6.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <version>3.1.2</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.4.1</version>
                     <executions>
                         <execution>
                             <id>default-jar</id>
@@ -804,7 +834,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>3.3.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -814,7 +844,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
+                    <version>3.3.1</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -828,7 +858,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.2.5</version>
                 </plugin>
             </plugins>
         </pluginManagement>

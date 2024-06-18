@@ -5,7 +5,7 @@
     <groupId>com.nsn.cumulocity.dependencies</groupId>
     <artifactId>cumulocity-dependencies</artifactId>
     <packaging>pom</packaging>
-    <version>${cumulocity-dependencies.version}</version>
+    <version>${revision}${changelist}</version>
     <name>Cumulocity :: Dependencies</name>
 
     <organization>
@@ -97,22 +97,22 @@
         <lombok.version>1.18.24</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
-        <osgi.cglib-nodep.version>${cglib-nodep.version}-${cumulocity-dependencies.version}</osgi.cglib-nodep.version>
-        <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
-        <osgi.commons-configuration.version>${commons-configuration.version}-${cumulocity-dependencies.version}</osgi.commons-configuration.version>
-        <osgi.jackson.version>${jackson.version}-${cumulocity-dependencies.version}</osgi.jackson.version>
-        <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
-        <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
-        <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
-        <osgi.logbook.version>${logbook.version}-${cumulocity-dependencies.version}</osgi.logbook.version>
-        <osgi.mongodb-driver.version>${mongodb-driver.version}-${cumulocity-dependencies.version}</osgi.mongodb-driver.version>
-        <osgi.moquette.version>${moquette.version}-${cumulocity-dependencies.version}</osgi.moquette.version>
-        <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
-        <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
-        <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
-        <osgi.sslcontext.version>${sslcontext.version}-${cumulocity-dependencies.version}</osgi.sslcontext.version>
-        <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
-        <osgi.uom.version>${uom.version}-${cumulocity-dependencies.version}</osgi.uom.version>
+        <osgi.cglib-nodep.version>${cglib-nodep.version}-${revision}${changelist}</osgi.cglib-nodep.version>
+        <osgi.cometd.version>${cometd.version}-${revision}${changelist}</osgi.cometd.version>
+        <osgi.commons-configuration.version>${commons-configuration.version}-${revision}${changelist}</osgi.commons-configuration.version>
+        <osgi.jackson.version>${jackson.version}-${revision}${changelist}</osgi.jackson.version>
+        <osgi.json-path.version>${json-path.version}-${revision}${changelist}</osgi.json-path.version>
+        <osgi.json-smart.version>${json-smart.version}-${revision}${changelist}</osgi.json-smart.version>
+        <osgi.kubernetes-client.version>${kubernetes-client.version}-${revision}${changelist}</osgi.kubernetes-client.version>
+        <osgi.logbook.version>${logbook.version}-${revision}${changelist}</osgi.logbook.version>
+        <osgi.mongodb-driver.version>${mongodb-driver.version}-${revision}${changelist}</osgi.mongodb-driver.version>
+        <osgi.moquette.version>${moquette.version}-${revision}${changelist}</osgi.moquette.version>
+        <osgi.odata.version>${odata.version}-${revision}${changelist}</osgi.odata.version>
+        <osgi.pulsar-client.version>${pulsar-client.version}-${revision}${changelist}</osgi.pulsar-client.version>
+        <osgi.spring-dm.version>${spring-dm.version}-${revision}${changelist}</osgi.spring-dm.version>
+        <osgi.sslcontext.version>${sslcontext.version}-${revision}${changelist}</osgi.sslcontext.version>
+        <osgi.svenson.version>${svenson.version}-${revision}${changelist}</osgi.svenson.version>
+        <osgi.uom.version>${uom.version}-${revision}${changelist}</osgi.uom.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
         <assertj.version>3.16.1</assertj.version>

@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.nsn.cumulocity.dependencies</groupId>
         <artifactId>cumulocity-dependencies</artifactId>
-        <version>${cumulocity-dependencies.version}</version>
+        <version>${revision}${changelist}</version>
     </parent>
 
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>

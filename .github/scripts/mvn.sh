@@ -10,8 +10,17 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-if [ -n "${DEPENDENCIES_VERSION}" ]; then
-  MAVEN_ARGS="--define cumulocity-dependencies.version=${DEPENDENCIES_VERSION} ${MAVEN_ARGS}"
+if [ -n "${VERSION}" ]; then
+  MAVEN_ARGS="--define revision=${VERSION} ${MAVEN_ARGS}"
+  if [ -n "${CHANGE_VERSION}" ]; then
+    MAVEN_ARGS="--define changelist=${CHANGE_VERSION} ${MAVEN_ARGS}"
+  else
+    MAVEN_ARGS="--define changelist= ${MAVEN_ARGS}"
+  fi
+else
+  if [ -n "${CHANGE_VERSION}" ]; then
+    MAVEN_ARGS="--define changelist=${CHANGE_VERSION} ${MAVEN_ARGS}"
+  fi
 fi
 
 MAVEN_PROFILES="${MAVEN_PROFILES:-ci}"
