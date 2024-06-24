@@ -36,7 +36,7 @@
 
     <properties>
         <!-- https://maven.apache.org/maven-ci-friendly.html -->
-        <revision>1020.432.0</revision>
+        <revision>1020.433.0</revision>
         <changelist>-SNAPSHOT</changelist>
         <cumulocity-dependencies.version>${revision}${changelist}</cumulocity-dependencies.version>
 
@@ -668,6 +668,9 @@
                                     </excludes>
                                 </bannedDependencies>
                                 <dependencyConvergence />
+                                <requireJavaVersion>
+                                    <version>${java.version}</version>
+                                </requireJavaVersion>
                                 <requireMavenVersion>
                                     <version>3.9</version>
                                 </requireMavenVersion>
