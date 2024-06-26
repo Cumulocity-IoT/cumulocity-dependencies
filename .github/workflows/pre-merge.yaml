@@ -16,8 +16,16 @@ jobs:
       MAVEN_PROFILES: "?ci,?pre-merge"
 
     steps:
+      - name: List before checkout
+        run: |
+          ls -la .
+
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: List after checkout
+        run: |
+          ls -la .
 
       - name: Get PR number
         id: pr_number
