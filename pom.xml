@@ -25,7 +25,6 @@
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
         <module>kubernetes-client</module>
-        <module>mongodb</module>
         <module>pulsar-client</module>
         <module>jackson-module-jsonSchema</module>
     </modules>
@@ -75,7 +74,6 @@
         <json-path.version>2.0.0</json-path.version>
         <json-smart.version>2.1.1</json-smart.version>
         <kubernetes-client.version>5.9.0</kubernetes-client.version>
-        <mongodb-driver.version>4.10.2</mongodb-driver.version>
         <netty.version>4.1.89.Final</netty.version>
         <odata.version>2.0.4</odata.version>
         <okhttp3.version>3.12.12</okhttp3.version>
@@ -99,7 +97,6 @@
         <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
-        <osgi.mongodb-driver.version>${mongodb-driver.version}-${cumulocity-dependencies.version}</osgi.mongodb-driver.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
         <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
         <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
@@ -344,31 +341,6 @@
                 <version>${javassist.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>bson</artifactId>
-                <version>${mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>bson-record-codec</artifactId>
-                <version>${mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>mongodb-driver-core</artifactId>
-                <version>${mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>mongodb-driver-legacy</artifactId>
-                <version>${mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.mongodb</groupId>
-                <artifactId>mongodb-driver-sync</artifactId>
-                <version>${mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>${osgi-core.version}</version>
@@ -469,11 +441,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>kubernetes-client</artifactId>
                 <version>${osgi.kubernetes-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>mongodb</artifactId>
-                <version>${osgi.mongodb-driver.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
