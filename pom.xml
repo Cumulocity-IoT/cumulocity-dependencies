@@ -26,7 +26,6 @@
         <module>olingo-odata2-core</module>
         <module>moquette-dependencies</module>
         <module>kubernetes-client</module>
-        <module>logbook</module>
         <module>mongodb</module>
         <module>pulsar-client</module>
         <module>jackson-module-jsonSchema</module>
@@ -77,7 +76,6 @@
         <json-path.version>2.0.0</json-path.version>
         <json-smart.version>2.1.1</json-smart.version>
         <kubernetes-client.version>5.9.0</kubernetes-client.version>
-        <logbook.version>2.14.0</logbook.version>
         <mongodb-driver.version>4.10.2</mongodb-driver.version>
         <moquette.version>0.9</moquette.version>
         <netty.version>4.1.89.Final</netty.version>
@@ -103,7 +101,6 @@
         <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
-        <osgi.logbook.version>${logbook.version}-${cumulocity-dependencies.version}</osgi.logbook.version>
         <osgi.mongodb-driver.version>${mongodb-driver.version}-${cumulocity-dependencies.version}</osgi.mongodb-driver.version>
         <osgi.moquette.version>${moquette.version}-${cumulocity-dependencies.version}</osgi.moquette.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
@@ -148,13 +145,6 @@
                 <version>${junit.version}</version>
                 <scope>import</scope>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.zalando</groupId>
-                <artifactId>logbook-bom</artifactId>
-                <version>${logbook.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <!-- COMPILE DEPENDENCIES -->
@@ -487,11 +477,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>kubernetes-client</artifactId>
                 <version>${osgi.kubernetes-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>logbook</artifactId>
-                <version>${osgi.logbook.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
