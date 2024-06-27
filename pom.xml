@@ -17,7 +17,6 @@
         <module>commons-configuration</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
-        <module>cglib-nodep</module>
         <module>svenson</module>
         <module>json-path</module>
         <module>json-smart</module>
@@ -51,7 +50,6 @@
         <!-- COMPILE DEPENDENCIES VERSIONS -->
         <avro.version>1.11.3</avro.version>
         <bouncycastle.version>1.70</bouncycastle.version>
-        <cglib-nodep.version>2.2</cglib-nodep.version>
         <cometd.version>3.0.10</cometd.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-codec.version>1.15</commons-codec.version>
@@ -90,7 +88,6 @@
         <lombok.version>1.18.24</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
-        <osgi.cglib-nodep.version>${cglib-nodep.version}-${cumulocity-dependencies.version}</osgi.cglib-nodep.version>
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
         <osgi.commons-configuration.version>${commons-configuration.version}-${cumulocity-dependencies.version}</osgi.commons-configuration.version>
         <osgi.jackson.version>${jackson.version}-${cumulocity-dependencies.version}</osgi.jackson.version>
@@ -142,11 +139,6 @@
             </dependency>
 
             <!-- COMPILE DEPENDENCIES -->
-            <dependency>
-                <groupId>cglib</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${cglib-nodep.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>
                 <artifactId>jackson-module-jsonSchema</artifactId>
@@ -402,11 +394,6 @@
             </dependency>
 
             <!-- CHILD MODULES -->
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>cglib-nodep</artifactId>
-                <version>${osgi.cglib-nodep.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-server</artifactId>
