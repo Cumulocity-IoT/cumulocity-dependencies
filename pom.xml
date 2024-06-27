@@ -14,7 +14,6 @@
     </organization>
 
     <modules>
-        <module>commons-configuration</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
         <module>svenson</module>
@@ -55,7 +54,6 @@
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-compress.version>1.26.0</commons-compress.version>
-        <commons-configuration.version>1.7</commons-configuration.version>
         <commons-digester.version>1.8.1</commons-digester.version>
         <commons-io.version>2.15.1</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
@@ -89,7 +87,6 @@
 
         <!-- CHILD MODULES VERSIONS -->
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
-        <osgi.commons-configuration.version>${commons-configuration.version}-${cumulocity-dependencies.version}</osgi.commons-configuration.version>
         <osgi.jackson.version>${jackson.version}-${cumulocity-dependencies.version}</osgi.jackson.version>
         <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
@@ -207,30 +204,9 @@
                 <version>${commons-compress.version}</version>
             </dependency>
             <dependency>
-                <groupId>commons-configuration</groupId>
-                <artifactId>commons-configuration</artifactId>
-                <version>${commons-configuration.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-digester</groupId>
-                <artifactId>commons-digester</artifactId>
-                <version>${commons-digester.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>${commons-lang.version}</version>
             </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
@@ -403,11 +379,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-websocket-javax-server</artifactId>
                 <version>${osgi.cometd.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>commons-configuration</artifactId>
-                <version>${osgi.commons-configuration.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
