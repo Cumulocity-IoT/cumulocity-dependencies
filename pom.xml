@@ -24,7 +24,6 @@
         <module>spring-dm</module>
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
-        <module>moquette-dependencies</module>
         <module>kubernetes-client</module>
         <module>mongodb</module>
         <module>pulsar-client</module>
@@ -77,7 +76,6 @@
         <json-smart.version>2.1.1</json-smart.version>
         <kubernetes-client.version>5.9.0</kubernetes-client.version>
         <mongodb-driver.version>4.10.2</mongodb-driver.version>
-        <moquette.version>0.9</moquette.version>
         <netty.version>4.1.89.Final</netty.version>
         <odata.version>2.0.4</odata.version>
         <okhttp3.version>3.12.12</okhttp3.version>
@@ -102,7 +100,6 @@
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
         <osgi.mongodb-driver.version>${mongodb-driver.version}-${cumulocity-dependencies.version}</osgi.mongodb-driver.version>
-        <osgi.moquette.version>${moquette.version}-${cumulocity-dependencies.version}</osgi.moquette.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
         <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
         <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
@@ -178,11 +175,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hdrhistogram</groupId>
-                <artifactId>HdrHistogram</artifactId>
-                <version>2.1.12</version>
             </dependency>
             <dependency>
                 <groupId>com.jayway.jsonpath</groupId>
@@ -482,11 +474,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>mongodb</artifactId>
                 <version>${osgi.mongodb-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>moquette-dependencies</artifactId>
-                <version>${osgi.moquette.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
