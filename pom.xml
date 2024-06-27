@@ -25,7 +25,6 @@
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
         <module>moquette-dependencies</module>
-        <module>uom</module>
         <module>kubernetes-client</module>
         <module>logbook</module>
         <module>mongodb</module>
@@ -91,7 +90,6 @@
         <spring-dm.version>1.2.1</spring-dm.version>
         <spring.version>5.3.29</spring.version>
         <svenson.version>1.5.8</svenson.version>
-        <uom.version>0.7.1</uom.version>
 
         <!-- PROVIDED DEPENDENCIES -->
         <findbugs.version>1.3.2</findbugs.version>
@@ -112,7 +110,6 @@
         <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
         <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
         <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
-        <osgi.uom.version>${uom.version}-${cumulocity-dependencies.version}</osgi.uom.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
         <assertj.version>3.16.1</assertj.version>
@@ -429,21 +426,6 @@
                 <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <dependency>
-                <groupId>systems.uom</groupId>
-                <artifactId>systems-common</artifactId>
-                <version>${uom.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>systems.uom</groupId>
-                <artifactId>systems-quantity</artifactId>
-                <version>${uom.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>systems.uom</groupId>
-                <artifactId>systems-unicode</artifactId>
-                <version>${uom.version}</version>
-            </dependency>
 
             <!-- PROVIDED DEPENDENCIES -->
             <dependency>
@@ -565,11 +547,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>svenson</artifactId>
                 <version>${osgi.svenson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>uom</artifactId>
-                <version>${osgi.uom.version}</version>
             </dependency>
 
             <!-- TEST DEPENDENCIES -->
