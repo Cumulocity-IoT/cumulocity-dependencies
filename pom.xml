@@ -24,7 +24,6 @@
         <module>olingo-odata2-core</module>
         <module>kubernetes-client</module>
         <module>pulsar-client</module>
-        <module>jackson-module-jsonSchema</module>
     </modules>
 
     <properties>
@@ -87,7 +86,6 @@
 
         <!-- CHILD MODULES VERSIONS -->
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
-        <osgi.jackson.version>${jackson.version}-${cumulocity-dependencies.version}</osgi.jackson.version>
         <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
@@ -136,17 +134,6 @@
             </dependency>
 
             <!-- COMPILE DEPENDENCIES -->
-            <dependency>
-                <groupId>com.fasterxml.jackson.module</groupId>
-                <artifactId>jackson-module-jsonSchema</artifactId>
-                <version>${jackson.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>javax.validation</groupId>
-                        <artifactId>validation-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -379,11 +366,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-websocket-javax-server</artifactId>
                 <version>${osgi.cometd.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>jackson-module-jsonSchema</artifactId>
-                <version>${osgi.jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
