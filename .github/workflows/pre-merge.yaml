@@ -16,6 +16,16 @@ jobs:
       MAVEN_PROFILES: "?ci,?pre-merge"
 
     steps:
+      - id: post-merge
+        uses: IOTA/c8y-jenkins-common-steps/post-merge-testing-domain-action@task/pm-domain-action
+        with:
+          branch-name: "10.19.0.x/PostMerge-cumulocity-Provisioned"
+          common-steps-app-id: ${{ vars.C8Y_JENKINS_COMMON_STEPS_APP_ID }}
+          common-steps-app-private-key: ${{ secrets.C8Y_JENKINS_COMMON_STEPS_APP_PRIVATE_KEY }}
+
+      - run: |
+          echo "dmain: ${{ steps.post-merge.outputs.domain-name }}"
+
       - name: Checkout
         uses: actions/checkout@v3
 
