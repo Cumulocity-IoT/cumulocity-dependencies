@@ -232,6 +232,11 @@
                 <version>3.1.0</version>
             </dependency>
             <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>2.0.2</version>
+            </dependency>
+            <dependency>
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>javax.ws.rs-api</artifactId>
                 <version>2.1.1</version>
@@ -508,7 +513,13 @@
                                 <banDuplicatePomDependencyVersions />
                                 <bannedDependencies>
                                     <excludes>
+                                        <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
                                         <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
+                                        <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
+                                        <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
+                                        <exclude>javax.mail</exclude> <!-- moved to: jakarta.mail:jakarta.mail-api -->
+                                        <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
+                                        <exclude>javax.validation:validation-api</exclude> <!-- moved to: jakarta.validation:jakarta.validation-api -->
                                     </excludes>
                                 </bannedDependencies>
                                 <dependencyConvergence />
