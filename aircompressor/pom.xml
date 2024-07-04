@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.nsn.cumulocity.dependencies</groupId>
+        <artifactId>cumulocity-dependencies</artifactId>
+        <version>${revision}${changelist}</version>
+    </parent>
+
+    <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+    <artifactId>aircompressor</artifactId>
+    <version>${osgi.aircompressor.version}</version>
+    <name>Cumulocity :: Dependencies :: OSGi :: Air Compressor</name>
+    <url>http://startups.jira.com/wiki/display/MTM/Home</url>
+    <description>
+        This is an unmodified re-package of io.airlift:aircompressor,
+        only extended by classes from org.apache.pulsar:pulsar-common
+        in io.airlift.compress package, to avoid split package issue on OSGi.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.airlift</groupId>
+            <artifactId>aircompressor</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pulsar</groupId>
+            <artifactId>pulsar-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <includeGroupIds>io.airlift,org.apache.pulsar</includeGroupIds>
+                    <includeArtifactIds>aircompressor,pulsar-common</includeArtifactIds>
+                    <includes>
+                        io/airlift/compress/**/*
+                    </includes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Import-Package>
+                            !io.airlift.compress.*,
+                            org.apache.hadoop.*;resolution:=optional,
+                            *
+                        </Import-Package>
+                        <Export-Package>
+                            io.airlift.compress.*
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

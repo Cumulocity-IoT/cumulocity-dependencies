@@ -14,16 +14,18 @@
     </organization>
 
     <modules>
+        <module>aircompressor</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
-        <module>svenson</module>
         <module>json-path</module>
         <module>json-smart</module>
-        <module>spring-dm</module>
+        <module>kubernetes-client</module>
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
-        <module>kubernetes-client</module>
-        <module>pulsar-client</module>
+        <module>pulsar-client-original</module>
+        <module>pulsar-common</module>
+        <module>spring-dm</module>
+        <module>svenson</module>
     </modules>
 
     <properties>
@@ -46,13 +48,16 @@
         </unpack.excludes>
 
         <!-- COMPILE DEPENDENCIES VERSIONS -->
+        <aircompressor.version>0.17</aircompressor.version>
         <avro.version>1.11.3</avro.version>
+        <bookkeeper.version>4.14.5</bookkeeper.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <cometd.version>3.0.10</cometd.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-compress.version>1.26.0</commons-compress.version>
+        <commons-configuration.version>1.10</commons-configuration.version>
         <commons-digester.version>1.8.1</commons-digester.version>
         <commons-io.version>2.15.1</commons-io.version>
         <commons-lang.version>2.6</commons-lang.version>
@@ -86,6 +91,7 @@
         <lombok.version>1.18.24</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
+        <osgi.aircompressor.version>${aircompressor.version}-${cumulocity-dependencies.version}</osgi.aircompressor.version>
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
         <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
         <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
@@ -113,6 +119,11 @@
                 <type>pom</type>
             </dependency>
             <dependency>
+                <groupId>io.airlift</groupId>
+                <artifactId>aircompressor</artifactId>
+                <version>${aircompressor.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>io.fabric8</groupId>
                 <artifactId>kubernetes-client-bom</artifactId>
                 <version>${kubernetes-client.version}</version>
@@ -135,6 +146,17 @@
             </dependency>
 
             <!-- COMPILE DEPENDENCIES -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jsonSchema</artifactId>
+                <version>${jackson.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.validation</groupId>
+                        <artifactId>validation-api</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
@@ -197,6 +219,17 @@
                 <version>${commons-compress.version}</version>
             </dependency>
             <dependency>
+                <groupId>commons-configuration</groupId>
+                <artifactId>commons-configuration</artifactId>
+                <version>${commons-configuration.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
@@ -242,6 +275,16 @@
                 <version>2.1.1</version>
             </dependency>
             <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.avro</groupId>
+                <artifactId>avro-protobuf</artifactId>
+                <version>${avro.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
@@ -258,7 +301,64 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
+                <artifactId>bouncy-castle-bc</artifactId>
+                <version>${pulsar-client.version}</version>
+                <classifier>pkg</classifier>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-common</artifactId>
+                <version>${pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
                 <artifactId>pulsar-client</artifactId>
+                <version>${pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-api</artifactId>
+                <version>${pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-admin-api</artifactId>
+                <version>${pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-admin-original</artifactId>
+                <version>${pulsar-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.pulsar</groupId>
+                        <artifactId>pulsar-client-original</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-messagecrypto-bc</artifactId>
+                <version>${pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-client-original</artifactId>
+                <version>${pulsar-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.pulsar</groupId>
+                        <artifactId>pulsar-common</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>pulsar-transaction-common</artifactId>
                 <version>${pulsar-client.version}</version>
             </dependency>
             <dependency>
@@ -370,6 +470,11 @@
             <!-- CHILD MODULES -->
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+                <artifactId>aircompressor</artifactId>
+                <version>${osgi.aircompressor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-server</artifactId>
                 <version>${osgi.cometd.version}</version>
             </dependency>
@@ -405,7 +510,12 @@
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>pulsar-client</artifactId>
+                <artifactId>pulsar-client-original</artifactId>
+                <version>${osgi.pulsar-client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+                <artifactId>pulsar-common</artifactId>
                 <version>${osgi.pulsar-client.version}</version>
             </dependency>
             <dependency>
@@ -516,6 +626,7 @@
                                         <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
                                         <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
                                         <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
+                                        <exclude>io.airlift:aircompressor</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:aircompressor -->
                                         <exclude>io.fabric8:kubernetes-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:kubernetes-client -->
                                         <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
                                         <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
@@ -525,6 +636,7 @@
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
+                                        <exclude>org.apache.pulsar:pulsar-common</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-common -->
                                         <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
                                         <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
                                         <exclude>org.springframework.osgi:spring-osgi-annotation</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-annotation -->
@@ -534,18 +646,20 @@
                                         <exclude>org.springframework.osgi:spring-osgi-web</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-web -->
                                     </excludes>
                                     <includes>
-                                        <exclude>com.google.code.svenson:svenson:provided</exclude>
-                                        <exclude>io.fabric8:kubernetes-client:provided</exclude>
-                                        <exclude>org.apache.olingo:olingo-odata2-api:provided</exclude>
-                                        <exclude>org.apache.olingo:olingo-odata2-core:provided</exclude>
-                                        <exclude>org.apache.pulsar:pulsar-client-original:provided</exclude>
-                                        <exclude>org.cometd.java:cometd-java-server:provided</exclude>
-                                        <exclude>org.cometd.java:cometd-java-websocket-javax-server:provided</exclude>
-                                        <exclude>org.springframework.osgi:spring-osgi-annotation:provided</exclude>
-                                        <exclude>org.springframework.osgi:spring-osgi-core:provided</exclude>
-                                        <exclude>org.springframework.osgi:spring-osgi-extender:provided</exclude>
-                                        <exclude>org.springframework.osgi:spring-osgi-io:provided</exclude>
-                                        <exclude>org.springframework.osgi:spring-osgi-web:provided</exclude>
+                                        <include>io.airlift:aircompressor:provided</include>
+                                        <include>com.google.code.svenson:svenson:provided</include>
+                                        <include>io.fabric8:kubernetes-client:provided</include>
+                                        <include>org.apache.olingo:olingo-odata2-api:provided</include>
+                                        <include>org.apache.olingo:olingo-odata2-core:provided</include>
+                                        <include>org.apache.pulsar:pulsar-client-original:provided</include>
+                                        <include>org.apache.pulsar:pulsar-common:provided</include>
+                                        <include>org.cometd.java:cometd-java-server:provided</include>
+                                        <include>org.cometd.java:cometd-java-websocket-javax-server:provided</include>
+                                        <include>org.springframework.osgi:spring-osgi-annotation:provided</include>
+                                        <include>org.springframework.osgi:spring-osgi-core:provided</include>
+                                        <include>org.springframework.osgi:spring-osgi-extender:provided</include>
+                                        <include>org.springframework.osgi:spring-osgi-io:provided</include>
+                                        <include>org.springframework.osgi:spring-osgi-web:provided</include>
                                     </includes>
                                 </bannedDependencies>
                                 <dependencyConvergence />
