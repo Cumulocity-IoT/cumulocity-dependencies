@@ -513,14 +513,40 @@
                                 <banDuplicatePomDependencyVersions />
                                 <bannedDependencies>
                                     <excludes>
+                                        <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
                                         <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
                                         <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
+                                        <exclude>io.fabric8:kubernetes-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:kubernetes-client -->
                                         <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
                                         <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
                                         <exclude>javax.mail</exclude> <!-- moved to: jakarta.mail:jakarta.mail-api -->
                                         <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
                                         <exclude>javax.validation:validation-api</exclude> <!-- moved to: jakarta.validation:jakarta.validation-api -->
+                                        <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
+                                        <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
+                                        <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
+                                        <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
+                                        <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
+                                        <exclude>org.springframework.osgi:spring-osgi-annotation</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-annotation -->
+                                        <exclude>org.springframework.osgi:spring-osgi-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-core -->
+                                        <exclude>org.springframework.osgi:spring-osgi-extender</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-extender -->
+                                        <exclude>org.springframework.osgi:spring-osgi-io</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-io -->
+                                        <exclude>org.springframework.osgi:spring-osgi-web</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-web -->
                                     </excludes>
+                                    <includes>
+                                        <exclude>com.google.code.svenson:svenson:provided</exclude>
+                                        <exclude>io.fabric8:kubernetes-client:provided</exclude>
+                                        <exclude>org.apache.olingo:olingo-odata2-api:provided</exclude>
+                                        <exclude>org.apache.olingo:olingo-odata2-core:provided</exclude>
+                                        <exclude>org.apache.pulsar:pulsar-client-original:provided</exclude>
+                                        <exclude>org.cometd.java:cometd-java-server:provided</exclude>
+                                        <exclude>org.cometd.java:cometd-java-websocket-javax-server:provided</exclude>
+                                        <exclude>org.springframework.osgi:spring-osgi-annotation:provided</exclude>
+                                        <exclude>org.springframework.osgi:spring-osgi-core:provided</exclude>
+                                        <exclude>org.springframework.osgi:spring-osgi-extender:provided</exclude>
+                                        <exclude>org.springframework.osgi:spring-osgi-io:provided</exclude>
+                                        <exclude>org.springframework.osgi:spring-osgi-web:provided</exclude>
+                                    </includes>
                                 </bannedDependencies>
                                 <dependencyConvergence />
                                 <requireJavaVersion>
