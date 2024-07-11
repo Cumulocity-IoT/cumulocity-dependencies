@@ -68,7 +68,6 @@
         <jackson.version>2.14.1</jackson.version>
         <javassist.version>3.25.0-GA</javassist.version>
         <jaxb.version>2.3.3</jaxb.version>
-        <jersey.version>2.34</jersey.version>
         <jetty.version>9.4.50.v20221201</jetty.version>
         <joda-time.version>2.10.10</joda-time.version>
         <json-path.version>2.0.0</json-path.version>
@@ -270,11 +269,6 @@
                 <version>2.0.2</version>
             </dependency>
             <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>2.1.1</version>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.avro</groupId>
                 <artifactId>avro</artifactId>
                 <version>${avro.version}</version>
@@ -298,6 +292,12 @@
                 <groupId>org.apache.olingo</groupId>
                 <artifactId>olingo-odata2-core</artifactId>
                 <version>${odata.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.ws.rs</groupId>
+                        <artifactId>javax.ws.rs-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
@@ -309,6 +309,12 @@
                 <groupId>org.apache.pulsar</groupId>
                 <artifactId>pulsar-common</artifactId>
                 <version>${pulsar-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.ws.rs</groupId>
+                        <artifactId>javax.ws.rs-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
@@ -395,11 +401,6 @@
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-util</artifactId>
                 <version>${jetty.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.glassfish.jersey.core</groupId>
-                <artifactId>jersey-client</artifactId>
-                <version>${jersey.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.javassist</groupId>
@@ -631,8 +632,9 @@
                                         <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
                                         <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
                                         <exclude>javax.mail</exclude> <!-- moved to: jakarta.mail:jakarta.mail-api -->
-                                        <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
                                         <exclude>javax.validation:validation-api</exclude> <!-- moved to: jakarta.validation:jakarta.validation-api -->
+                                        <exclude>javax.ws.rs:javax.ws.rs-api</exclude> <!-- use jakarta.ws.rs:jakarta.ws.rs-api -->
+                                        <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
