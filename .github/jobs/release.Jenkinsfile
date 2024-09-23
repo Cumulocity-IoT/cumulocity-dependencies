@@ -15,7 +15,7 @@ pipeline {
   }
   environment {
     MVN_SETTINGS = credentials('maven-settings')
-    GIT_CREDENTIALS = credentials('tech-c8y-github.softwareag.com')
+    GIT_CREDENTIALS = credentials('tech-c8y-github-ghec')
   }
   stages {
     stage('Prepare') {
@@ -54,7 +54,7 @@ pipeline {
     stage('Finish') {
       steps {
         echo "Publishing changes to git"
-        sh "git push --follow-tags https://${GIT_CREDENTIALS}@github.softwareag.com/IOTA/cumulocity-dependencies.git ${BRANCH_NAME}"
+        sh "git push --follow-tags https://${GIT_CREDENTIALS}@git@github.com/Cumulocity-IoT/cumulocity-dependencies.git ${BRANCH_NAME}"
       }
     }
   }
