@@ -17,8 +17,6 @@
         <module>aircompressor</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
-        <module>json-path</module>
-        <module>json-smart</module>
         <module>kubernetes-client</module>
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
@@ -71,7 +69,6 @@
         <jetty.version>9.4.50.v20221201</jetty.version>
         <joda-time.version>2.10.10</joda-time.version>
         <json-path.version>2.0.0</json-path.version>
-        <json-smart.version>2.1.1</json-smart.version>
         <kubernetes-client.version>5.9.0</kubernetes-client.version>
         <netty.version>4.1.89.Final</netty.version>
         <odata.version>2.0.4</odata.version>
@@ -92,8 +89,6 @@
         <!-- CHILD MODULES VERSIONS -->
         <osgi.aircompressor.version>${aircompressor.version}-${cumulocity-dependencies.version}</osgi.aircompressor.version>
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
-        <osgi.json-path.version>${json-path.version}-${cumulocity-dependencies.version}</osgi.json-path.version>
-        <osgi.json-smart.version>${json-smart.version}-${cumulocity-dependencies.version}</osgi.json-smart.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
         <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
@@ -237,11 +232,6 @@
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>net.minidev</groupId>
-                <artifactId>json-smart</artifactId>
-                <version>${json-smart.version}</version>
             </dependency>
             <dependency>
                 <groupId>jakarta.annotation</groupId>
@@ -483,16 +473,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-websocket-javax-server</artifactId>
                 <version>${osgi.cometd.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>json-path</artifactId>
-                <version>${osgi.json-path.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>json-smart</artifactId>
-                <version>${osgi.json-smart.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
