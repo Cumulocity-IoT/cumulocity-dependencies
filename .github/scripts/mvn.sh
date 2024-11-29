@@ -2,10 +2,12 @@
 
 MAVEN_CLI_ARGS="${MAVEN_CLI_ARGS:-} $@"
 VERBOSE=true
+THREADS=true
 
 while [ $# -gt 0 ]; do
   case "$1" in
     -q | --quiet ) VERBOSE=false; shift ;;
+    -T | --threads ) THREADS=false; shift ;;
     * ) shift ;;
   esac
 done
@@ -23,17 +25,29 @@ else
   fi
 fi
 
-MAVEN_PROFILES="${MAVEN_PROFILES:-ci}"
-MAVEN_CLI_ARGS="--activate-profiles ${MAVEN_PROFILES} ${MAVEN_CLI_ARGS}"
+if [ -n "${MAVEN_PROFILES}" ]; then
+  MAVEN_CLI_ARGS="--activate-profiles ${MAVEN_PROFILES} ${MAVEN_CLI_ARGS}"
+fi
 
 if [ -n "${WORKSPACE}" ]; then
   MAVEN_CLI_ARGS="--define maven.repo.local=${WORKSPACE}/.m2/repository ${MAVEN_CLI_ARGS}"
+elif [ -n "${GITHUB_WORKSPACE}" ]; then
+  MAVEN_CLI_ARGS="--define maven.repo.local=${GITHUB_WORKSPACE}/.m2/repository ${MAVEN_CLI_ARGS}"
 fi
 
-MVN_SETTINGS="${MVN_SETTINGS:-$HOME/.m2/settings.xml}"
-MAVEN_CLI_ARGS="--settings ${MVN_SETTINGS} ${MAVEN_CLI_ARGS}"
+if [ -n "${MVN_SETTINGS}" ]; then
+  MAVEN_CLI_ARGS="--settings ${MVN_SETTINGS} ${MAVEN_CLI_ARGS}"
+fi
 
-if [ ${VERBOSE} = true ]; then
+if [ "${THREADS}" == "true" ]; then
+  MAVEN_CLI_ARGS="--threads 4 ${MAVEN_CLI_ARGS}"
+fi
+
+if [ "${CI}" == "true" ]; then
+  MAVEN_CLI_ARGS="--activate-profiles ci --batch-mode ${MAVEN_CLI_ARGS}"
+fi
+
+if [ "${VERBOSE}" == "true" ]; then
   MAVEN_CLI_ARGS="--show-version --errors ${MAVEN_CLI_ARGS}"
   set -x
 fi
@@ -41,4 +55,4 @@ fi
 # https://maven.apache.org/configure.html
 export MAVEN_OPTS="-Xms256m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=192m ${MAVEN_OPTS}"
 
-./mvnw --batch-mode --threads 4 ${MAVEN_CLI_ARGS}
+./mvnw ${MAVEN_CLI_ARGS}
