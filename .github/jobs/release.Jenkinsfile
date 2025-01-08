@@ -54,7 +54,7 @@ pipeline {
     stage('Finish') {
       steps {
         echo "Publishing changes to git"
-        sh "git push --follow-tags https://${GIT_CREDENTIALS}@git@github.com/Cumulocity-IoT/cumulocity-dependencies.git ${BRANCH_NAME}"
+        sh "git push --follow-tags https://${GIT_CREDENTIALS}@github.com/Cumulocity-IoT/cumulocity-dependencies.git ${BRANCH_NAME}"
       }
     }
   }
