@@ -65,7 +65,7 @@ def nextReleaseVersionOf(revision) {
   int major = Integer.parseInt(versions[0])
   int minor = Integer.parseInt(versions[1])
   int maintenance = Integer.parseInt(versions[2])
-  if (maintenance > 0) {
+  if (env.BRANCH_NAME.startsWith("release/")) {
     return "${major}.${minor}.${maintenance + 1}".toString()
   } else {
     return "${major}.${minor + 1}.${maintenance}".toString()
