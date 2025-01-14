@@ -45,14 +45,15 @@ public enum MethodOperator {
   CEILING("ceiling"),
   HAS("has"),
   HASANY("hasany"),
-  BY_GROUPID("bygroupid");
+  BY_GROUPID("bygroupid"),
+  IS_IN_HIERARCHY_OF("isinhierarchyof");
 
-  private String syntax;
-  private String stringRespresentation;
+  private final String syntax;
+  private final String stringRepresentation;
 
   private MethodOperator(final String syntax) {
     this.syntax = syntax;
-    stringRespresentation = syntax;
+    stringRepresentation = syntax;
   }
 
   /**
@@ -60,7 +61,7 @@ public enum MethodOperator {
    */
   @Override
   public String toString() {
-    return stringRespresentation;
+    return stringRepresentation;
   }
 
   /**

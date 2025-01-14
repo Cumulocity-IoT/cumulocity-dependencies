@@ -989,6 +989,14 @@ public class FilterParserImpl implements FilterParser {
     combination.add(new ParameterSet(boolean_, int64).setFurtherType(int64));
     lAvailableMethods.put(MethodOperator.BY_GROUPID.toUriLiteral(), new InfoMethod(MethodOperator.BY_GROUPID, 1, -1, combination));
 
+    // isinhierarchyof
+    combination = new ParameterSetCombination.PSCflex();
+    combination.add(new ParameterSet(boolean_, string));
+    combination.add(new ParameterSet(boolean_, int16).setFurtherType(int16));
+    combination.add(new ParameterSet(boolean_, int32).setFurtherType(int32));
+    combination.add(new ParameterSet(boolean_, int64).setFurtherType(int64));
+    lAvailableMethods.put(MethodOperator.IS_IN_HIERARCHY_OF.toUriLiteral(), new InfoMethod(MethodOperator.IS_IN_HIERARCHY_OF, 1, -1, combination));
+
     // ---unary---
 
     // minus
