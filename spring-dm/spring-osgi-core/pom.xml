@@ -89,6 +89,7 @@
                                 org/springframework/osgi/context/support/OsgiBundleXmlApplicationContext*,
                                 org/springframework/osgi/service/dependency/internal/MandatoryDependencyBeanPostProcessor*,
                                 org/springframework/osgi/service/importer/support/internal/aop/BaseServiceReferenceProxy*,
+                                org/springframework/osgi/service/importer/support/internal/aop/InfrastructureOsgiProxyAdvice*,
                                 org/springframework/osgi/service/importer/support/internal/aop/ServiceDynamicInterceptor*,
                                 org/springframework/osgi/service/importer/support/internal/aop/StaticServiceReferenceProxy*,
                                 org/springframework/osgi/service/importer/support/internal/aop/SwappingServiceReferenceProxy*,
