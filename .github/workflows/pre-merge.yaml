@@ -31,9 +31,11 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Configure Maven
-        run: |
-          echo '${{ secrets.MAVEN_DEVELOPER_SETTINGS }}' > $MVN_SETTINGS
+      - uses: Cumulocity-IoT/c8y-component-base/.github/actions/setup-java-maven@v1.0.0
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          C8Y_MVN_PUBLIC_USERNAME: ${{ secrets.C8Y_MVN_PUBLIC_USERNAME }}
+          C8Y_MVN_PUBLIC_PASSWORD: ${{ secrets.C8Y_MVN_PUBLIC_PASSWORD }}
 
       - name: Configure version
         run: |
