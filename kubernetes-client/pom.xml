@@ -15,6 +15,8 @@
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
     <properties>
+        <sundr.version>0.50.1</sundr.version>
+
         <osgi.require-capability>
             osgi.extender;
             filter:="(osgi.extender=osgi.serviceloader.processor)",
@@ -181,7 +183,7 @@
         <dependency>
             <groupId>io.sundr</groupId>
             <artifactId>builder-annotations</artifactId>
-            <version>0.50.1</version>
+            <version>${sundr.version}</version>
             <scope>compile</scope>
             <optional>true</optional>
             <exclusions>
@@ -195,7 +197,7 @@
         <dependency>
             <groupId>io.sundr</groupId>
             <artifactId>transform-annotations</artifactId>
-            <version>0.50.1</version>
+            <version>${sundr.version}</version>
             <scope>compile</scope>
             <optional>true</optional>
         </dependency>
