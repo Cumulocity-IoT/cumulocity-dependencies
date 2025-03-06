@@ -48,7 +48,7 @@
         <!-- COMPILE DEPENDENCIES VERSIONS -->
         <aircompressor.version>0.27</aircompressor.version>
         <avro.version>1.11.4</avro.version>
-        <bookkeeper.version>4.14.5</bookkeeper.version>
+        <bookkeeper.version>4.17.1</bookkeeper.version>
         <bouncycastle.version>1.70</bouncycastle.version>
         <cometd.version>3.0.10</cometd.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
