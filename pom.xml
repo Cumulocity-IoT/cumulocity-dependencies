@@ -14,6 +14,7 @@
     </organization>
 
     <modules>
+        <module>parent</module>
         <module>aircompressor</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
@@ -38,34 +39,26 @@
         <nexus.url>http://localhost:8080</nexus.url>
         <nexus.basePath>/nexus/content/repositories</nexus.basePath>
 
-        <unpack.source.directory>${project.build.directory}/sources</unpack.source.directory>
-        <unpack.target.directory>${project.build.outputDirectory}</unpack.target.directory>
-        <unpack.excludes>
-            META-INF/MANIFEST.MF,
-            META-INF/maven/**/*
-        </unpack.excludes>
-
         <!-- COMPILE DEPENDENCIES VERSIONS -->
         <aircompressor.version>0.27</aircompressor.version>
         <avro.version>1.11.4</avro.version>
         <bookkeeper.version>4.14.5</bookkeeper.version> <!-- pulsar-client.version bound -->
-        <bouncycastle.version>1.70</bouncycastle.version>
+        <bouncycastle.version>1.78.1</bouncycastle.version>
         <cometd.version>3.0.10</cometd.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <commons-beanutils.version>1.10.1</commons-beanutils.version>
         <commons-codec.version>1.15</commons-codec.version>
         <commons-collections.version>3.2.2</commons-collections.version>
-        <commons-compress.version>1.26.0</commons-compress.version>
+        <commons-compress.version>1.26.2</commons-compress.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-digester.version>1.8.1</commons-digester.version>
         <commons-io.version>2.15.1</commons-io.version>
-        <commons-lang.version>2.6</commons-lang.version>
-        <commons-lang3.version>3.14.0</commons-lang3.version>
+        <commons-lang3.version>3.17.0</commons-lang3.version>
         <gson.version>2.8.9</gson.version>
         <guava.version>32.1.3-jre</guava.version>
         <hk2.version>2.6.1</hk2.version> <!-- pulsar-client.version bound -->
-        <jackson.version>2.14.1</jackson.version>
+        <jackson.version>2.14.1</jackson.version> <!-- cxf.version bound -->
         <javassist.version>3.25.0-GA</javassist.version>
-        <jaxb.version>2.3.3</jaxb.version>
+        <jaxb.version>2.3.3</jaxb.version> <!-- cxf.version bound -->
         <jetty.version>9.4.50.v20221201</jetty.version>
         <joda-time.version>2.10.10</joda-time.version>
         <json-path.version>2.8.0</json-path.version>
@@ -78,8 +71,9 @@
         <pulsar-client.version>2.8.4</pulsar-client.version>
         <rs-api.version>2.1.6</rs-api.version>
         <slf4j.version>1.7.36</slf4j.version>
+        <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound -->
         <spring-dm.version>1.2.1</spring-dm.version>
-        <spring.version>5.3.39</spring.version>
+        <spring.version>5.3.39</spring.version> <!-- requires respective ServiceMix bundle https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core -->
         <svenson.version>1.5.8</svenson.version>
 
         <!-- PROVIDED DEPENDENCIES -->
@@ -96,10 +90,10 @@
         <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
-        <assertj.version>3.16.1</assertj.version>
-        <jmh.version>1.37</jmh.version>
-        <junit.version>5.9.3</junit.version>
-        <mockito.version>4.11.0</mockito.version>
+        <assertj.version>3.26.3</assertj.version>
+        <jmh.version>1.22</jmh.version>
+        <junit.version>5.12.0</junit.version>
+        <mockito.version>5.16.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -364,17 +358,17 @@
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcpkix-jdk15on</artifactId>
+                <artifactId>bcpkix-jdk18on</artifactId>
                 <version>${bouncycastle.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk15on</artifactId>
+                <artifactId>bcprov-jdk18on</artifactId>
                 <version>${bouncycastle.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-ext-jdk15on</artifactId>
+                <artifactId>bcprov-ext-jdk18on</artifactId>
                 <version>${bouncycastle.version}</version>
             </dependency>
             <dependency>
@@ -436,6 +430,11 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
             </dependency>
 
             <!-- PROVIDED DEPENDENCIES -->
@@ -544,6 +543,12 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.openjdk.jmh</groupId>
                 <artifactId>jmh-core</artifactId>
                 <version>${jmh.version}</version>
@@ -587,124 +592,10 @@
     </distributionManagement>
 
     <build>
-        <sourceDirectory>${unpack.source.directory}</sourceDirectory>
-
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <banDuplicatePomDependencyVersions />
-                                <bannedDependencies>
-                                    <excludes>
-                                        <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
-                                        <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
-                                        <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
-                                        <exclude>io.airlift:aircompressor</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:aircompressor -->
-                                        <exclude>io.fabric8:kubernetes-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:kubernetes-client -->
-                                        <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
-                                        <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
-                                        <exclude>javax.mail</exclude> <!-- moved to: jakarta.mail:jakarta.mail-api -->
-                                        <exclude>javax.validation:validation-api</exclude> <!-- moved to: jakarta.validation:jakarta.validation-api -->
-                                        <exclude>javax.ws.rs:javax.ws.rs-api</exclude> <!-- use jakarta.ws.rs:jakarta.ws.rs-api -->
-                                        <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
-                                        <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
-                                        <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
-                                        <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
-                                        <exclude>org.apache.pulsar:pulsar-common</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-common -->
-                                        <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
-                                        <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
-                                        <exclude>org.springframework.osgi:spring-osgi-annotation</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-annotation -->
-                                        <exclude>org.springframework.osgi:spring-osgi-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-core -->
-                                        <exclude>org.springframework.osgi:spring-osgi-extender</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-extender -->
-                                        <exclude>org.springframework.osgi:spring-osgi-io</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-io -->
-                                        <exclude>org.springframework.osgi:spring-osgi-web</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-web -->
-                                    </excludes>
-                                    <includes>
-                                        <include>io.airlift:aircompressor:provided</include>
-                                        <include>com.google.code.svenson:svenson:provided</include>
-                                        <include>io.fabric8:kubernetes-client:provided</include>
-                                        <include>org.apache.olingo:olingo-odata2-api:provided</include>
-                                        <include>org.apache.olingo:olingo-odata2-core:provided</include>
-                                        <include>org.apache.pulsar:pulsar-client-original:provided</include>
-                                        <include>org.apache.pulsar:pulsar-common:provided</include>
-                                        <include>org.cometd.java:cometd-java-server:provided</include>
-                                        <include>org.cometd.java:cometd-java-websocket-javax-server:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-annotation:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-core:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-extender:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-io:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-web:provided</include>
-                                    </includes>
-                                </bannedDependencies>
-                                <dependencyConvergence />
-                                <requireJavaVersion>
-                                    <version>${java.version}</version>
-                                </requireJavaVersion>
-                                <requireMavenVersion>
-                                    <version>3.9</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <skipMain>true</skipMain>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <configuration>
-                    <excludes>${unpack.excludes}</excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>unpack-dependencies</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${unpack.target.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-dependencies-sources</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>unpack-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>sources</classifier>
-                            <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
-                            <outputDirectory>${unpack.source.directory}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
 
@@ -737,42 +628,9 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>build-helper-maven-plugin</artifactId>
-                    <version>3.6.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.9</version>
-                    <configuration>
-                        <instructions>
-                            <_nouses>true</_nouses>
-                        </instructions>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>generate-manifest</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>manifest</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.3.2</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.13.0</version>
-                    <configuration>
-                        <source>${java.version}</source>
-                        <target>${java.version}</target>
-                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -786,52 +644,8 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-enforcer-plugin</artifactId>
-                    <version>3.5.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.4.1</version>
-                    <executions>
-                        <execution>
-                            <id>default-jar</id>
-                            <configuration>
-                                <archive>
-                                    <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                                </archive>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>3.3.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-site-plugin</artifactId>
-                    <version>3.12.1</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-source-plugin</artifactId>
-                    <version>3.3.1</version>
-                    <executions>
-                        <execution>
-                            <id>attach-sources</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>jar-no-fork</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.2.5</version>
                 </plugin>
             </plugins>
         </pluginManagement>
