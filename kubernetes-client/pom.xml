@@ -4,8 +4,9 @@
 
     <parent>
         <groupId>com.nsn.cumulocity.dependencies</groupId>
-        <artifactId>cumulocity-dependencies</artifactId>
+        <artifactId>parent</artifactId>
         <version>${revision}${changelist}</version>
+        <relativePath>../parent</relativePath>
     </parent>
 
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
@@ -155,12 +156,12 @@
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-ext-jdk15on</artifactId>
+            <artifactId>bcprov-ext-jdk18on</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
-            <artifactId>bcpkix-jdk15on</artifactId>
+            <artifactId>bcpkix-jdk18on</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
