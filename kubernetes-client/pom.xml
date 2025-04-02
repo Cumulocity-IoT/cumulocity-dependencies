@@ -16,7 +16,7 @@
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
     <properties>
-        <sundr.version>0.50.1</sundr.version>
+        <sundr.version>0.200.3</sundr.version>
 
         <osgi.require-capability>
             osgi.extender;
