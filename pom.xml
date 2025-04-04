@@ -78,7 +78,7 @@
 
         <!-- PROVIDED DEPENDENCIES -->
         <findbugs.version>1.3.7</findbugs.version>
-        <lombok.version>1.18.36</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
         <osgi.aircompressor.version>${aircompressor.version}-${cumulocity-dependencies.version}</osgi.aircompressor.version>
