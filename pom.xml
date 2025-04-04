@@ -90,7 +90,7 @@
         <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
-        <assertj.version>3.26.3</assertj.version>
+        <assertj.version>3.27.3</assertj.version>
         <jmh.version>1.22</jmh.version>
         <junit.version>5.12.0</junit.version>
         <mockito.version>5.16.0</mockito.version>
