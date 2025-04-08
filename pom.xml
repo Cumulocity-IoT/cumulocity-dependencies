@@ -30,7 +30,7 @@
     <properties>
         <!-- https://maven.apache.org/maven-ci-friendly.html -->
         <revision>2025.11.0</revision>
-        <changelist>-SNAPSHOT</changelist>
+        <changelist></changelist>
         <cumulocity-dependencies.version>${revision}${changelist}</cumulocity-dependencies.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
