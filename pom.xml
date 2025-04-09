@@ -93,7 +93,7 @@
         <assertj.version>3.27.3</assertj.version>
         <jmh.version>1.22</jmh.version>
         <junit.version>5.12.1</junit.version>
-        <mockito.version>5.16.0</mockito.version>
+        <mockito.version>5.17.0</mockito.version>
     </properties>
 
     <dependencyManagement>
