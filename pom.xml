@@ -15,14 +15,12 @@
 
     <modules>
         <module>parent</module>
-        <module>aircompressor</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
         <module>kubernetes-client</module>
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
         <module>pulsar-client-original</module>
-        <module>pulsar-common</module>
         <module>svenson</module>
     </modules>
 
@@ -65,7 +63,6 @@
         <netty.version>4.1.119.Final</netty.version>
         <odata.version>2.0.4</odata.version>
         <okhttp3.version>3.12.12</okhttp3.version>
-        <osgi-core.version>7.0.0</osgi-core.version>
         <protobuf.version>3.25.5</protobuf.version>
         <pulsar-client.version>2.8.4</pulsar-client.version>
         <rs-api.version>2.1.6</rs-api.version>
@@ -79,7 +76,6 @@
         <lombok.version>1.18.38</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
-        <osgi.aircompressor.version>${aircompressor.version}-${cumulocity-dependencies.version}</osgi.aircompressor.version>
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
@@ -336,12 +332,6 @@
                 <groupId>org.apache.pulsar</groupId>
                 <artifactId>pulsar-client-original</artifactId>
                 <version>${pulsar-client.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.apache.pulsar</groupId>
-                        <artifactId>pulsar-common</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
@@ -387,11 +377,6 @@
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
                 <version>${javassist.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.osgi</groupId>
-                <artifactId>osgi.core</artifactId>
-                <version>${osgi-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>
@@ -457,11 +442,6 @@
             <!-- CHILD MODULES -->
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>aircompressor</artifactId>
-                <version>${osgi.aircompressor.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-server</artifactId>
                 <version>${osgi.cometd.version}</version>
             </dependency>
@@ -488,11 +468,6 @@
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>pulsar-client-original</artifactId>
-                <version>${osgi.pulsar-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>pulsar-common</artifactId>
                 <version>${osgi.pulsar-client.version}</version>
             </dependency>
             <dependency>
