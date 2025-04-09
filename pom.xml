@@ -23,7 +23,6 @@
         <module>olingo-odata2-core</module>
         <module>pulsar-client-original</module>
         <module>pulsar-common</module>
-        <module>spring-dm</module>
         <module>svenson</module>
     </modules>
 
@@ -72,7 +71,6 @@
         <rs-api.version>2.1.6</rs-api.version>
         <slf4j.version>1.7.36</slf4j.version>
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound -->
-        <spring-dm.version>1.2.1</spring-dm.version>
         <spring.version>5.3.39</spring.version> <!-- requires respective ServiceMix bundle https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core -->
         <svenson.version>1.6.1</svenson.version>
 
@@ -86,7 +84,6 @@
         <osgi.kubernetes-client.version>${kubernetes-client.version}-${cumulocity-dependencies.version}</osgi.kubernetes-client.version>
         <osgi.odata.version>${odata.version}-${cumulocity-dependencies.version}</osgi.odata.version>
         <osgi.pulsar-client.version>${pulsar-client.version}-${cumulocity-dependencies.version}</osgi.pulsar-client.version>
-        <osgi.spring-dm.version>${spring-dm.version}-${cumulocity-dependencies.version}</osgi.spring-dm.version>
         <osgi.svenson.version>${svenson.version}-${cumulocity-dependencies.version}</osgi.svenson.version>
 
         <!-- TEST DEPENDENCIES VERSIONS -->
@@ -497,31 +494,6 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>pulsar-common</artifactId>
                 <version>${osgi.pulsar-client.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>spring-osgi-annotation</artifactId>
-                <version>${osgi.spring-dm.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>spring-osgi-core</artifactId>
-                <version>${osgi.spring-dm.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>spring-osgi-extender</artifactId>
-                <version>${osgi.spring-dm.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>spring-osgi-io</artifactId>
-                <version>${osgi.spring-dm.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
-                <artifactId>spring-osgi-web</artifactId>
-                <version>${osgi.spring-dm.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
