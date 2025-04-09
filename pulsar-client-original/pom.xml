@@ -12,7 +12,7 @@
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
     <artifactId>pulsar-client-original</artifactId>
     <version>${osgi.pulsar-client.version}</version>
-    <name>Cumulocity :: Dependencies :: OSGi :: Pulsar Client Original</name>
+    <name>Cumulocity :: Dependencies :: Patched :: Pulsar Client Original</name>
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
     <description>
         This is an unmodified re-package of org.apache.pulsar:pulsar-client-original,
@@ -30,7 +30,7 @@
             <artifactId>pulsar-client-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+            <groupId>org.apache.pulsar</groupId>
             <artifactId>pulsar-common</artifactId>
         </dependency>
         <dependency>
@@ -192,24 +192,6 @@
                         META-INF/MANIFEST.MF,
                         META-INF/maven/**/*
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Fragment-Host>com.nsn.cumulocity.dependencies.osgi.pulsar-common</Fragment-Host>
-                        <Import-Package>
-                            !org.apache.pulsar.client.impl.*,
-                            !org.apache.pulsar.client.util.*,
-                            *
-                        </Import-Package>
-                        <Export-Package>
-                            org.apache.pulsar.client.impl.*,
-                            org.apache.pulsar.client.util.*
-                        </Export-Package>
-                    </instructions>
                 </configuration>
             </plugin>
         </plugins>

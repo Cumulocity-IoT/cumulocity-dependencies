@@ -12,30 +12,11 @@
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
     <artifactId>kubernetes-client</artifactId>
     <version>${osgi.kubernetes-client.version}</version>
-    <name>Cumulocity :: Dependencies :: OSGi :: Kubernetes :: Java Client</name>
+    <name>Cumulocity :: Dependencies :: Patched :: Kubernetes :: Java Client</name>
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
     <properties>
         <sundr.version>0.50.1</sundr.version>
-
-        <osgi.require-capability>
-            osgi.extender;
-            filter:="(osgi.extender=osgi.serviceloader.processor)",
-        </osgi.require-capability>
-        <osgi.import>
-            !android.util*,
-            *,
-            io.fabric8.openshift.client.handlers;resolution:=optional
-        </osgi.import>
-        <osgi.export>
-            io.fabric8.kubernetes.client*;-noimport:=true,
-        </osgi.export>
-        <osgi.private>
-            io.fabric8.kubernetes.client.internal,
-            io.fabric8.kubernetes.client.handlers,
-            io.fabric8.kubernetes.client.dsl.base,
-            io.fabric8.kubernetes.client.dsl.internal
-        </osgi.private>
     </properties>
 
     <dependencies>
@@ -257,30 +238,6 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <skipMain>false</skipMain>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>false</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-Name>${project.name}</Bundle-Name>
-                        <Bundle-SymbolicName>${project.groupId}.${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>${osgi.export}</Export-Package>
-                        <Import-Package>${osgi.import}</Import-Package>
-                        <DynamicImport-Package>${osgi.dynamic.import}</DynamicImport-Package>
-                        <Require-Capability>${osgi.require-capability}</Require-Capability>
-                        <Provide-Capability>${osgi.provide-capability}</Provide-Capability>
-                        <Private-Package>${osgi.private}</Private-Package>
-                        <Require-Bundle>${osgi.bundles}</Require-Bundle>
-                        <Bundle-Activator>${osgi.activator}</Bundle-Activator>
-                        <Export-Service>${osgi.export.service}</Export-Service>
-                        <Include-Resource>
-                            /META-INF/services/io.fabric8.kubernetes.client.ServiceToURLProvider=target/classes/META-INF/services/io.fabric8.kubernetes.client.ServiceToURLProvider,
-                            /META-INF/services/io.fabric8.kubernetes.client.ExtensionAdapter=target/classes/META-INF/services/io.fabric8.kubernetes.client.ExtensionAdapter
-                        </Include-Resource>
-                    </instructions>
                 </configuration>
             </plugin>
         </plugins>

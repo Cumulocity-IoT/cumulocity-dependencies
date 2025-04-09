@@ -44,7 +44,6 @@
                                         <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
                                         <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
                                         <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
-                                        <exclude>io.airlift:aircompressor</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:aircompressor -->
                                         <exclude>io.fabric8:kubernetes-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:kubernetes-client -->
                                         <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
                                         <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
@@ -55,30 +54,17 @@
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
-                                        <exclude>org.apache.pulsar:pulsar-common</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-common -->
                                         <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
                                         <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
-                                        <exclude>org.springframework.osgi:spring-osgi-annotation</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-annotation -->
-                                        <exclude>org.springframework.osgi:spring-osgi-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-core -->
-                                        <exclude>org.springframework.osgi:spring-osgi-extender</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-extender -->
-                                        <exclude>org.springframework.osgi:spring-osgi-io</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-io -->
-                                        <exclude>org.springframework.osgi:spring-osgi-web</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:spring-osgi-web -->
                                     </excludes>
                                     <includes>
-                                        <include>io.airlift:aircompressor:provided</include>
                                         <include>com.google.code.svenson:svenson:provided</include>
                                         <include>io.fabric8:kubernetes-client:provided</include>
                                         <include>org.apache.olingo:olingo-odata2-api:provided</include>
                                         <include>org.apache.olingo:olingo-odata2-core:provided</include>
                                         <include>org.apache.pulsar:pulsar-client-original:provided</include>
-                                        <include>org.apache.pulsar:pulsar-common:provided</include>
                                         <include>org.cometd.java:cometd-java-server:provided</include>
                                         <include>org.cometd.java:cometd-java-websocket-javax-server:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-annotation:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-core:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-extender:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-io:provided</include>
-                                        <include>org.springframework.osgi:spring-osgi-web:provided</include>
                                     </includes>
                                 </bannedDependencies>
                                 <dependencyConvergence />
@@ -92,10 +78,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -149,25 +131,6 @@
                     <version>3.6.0</version>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-bundle-plugin</artifactId>
-                    <version>5.1.9</version>
-                    <configuration>
-                        <instructions>
-                            <_nouses>true</_nouses>
-                        </instructions>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>generate-manifest</id>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>manifest</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.14.0</version>
@@ -185,16 +148,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.4.2</version>
-                    <executions>
-                        <execution>
-                            <id>default-jar</id>
-                            <configuration>
-                                <archive>
-                                    <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                                </archive>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

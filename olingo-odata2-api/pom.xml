@@ -12,7 +12,7 @@
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
     <artifactId>olingo-odata2-api</artifactId>
     <version>${osgi.odata.version}</version>
-    <name>Cumulocity :: Dependencies :: OSGi :: Apache Olingo OData2 API</name>
+    <name>Cumulocity :: Dependencies :: Patched :: Apache Olingo OData2 API</name>
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
     <dependencies>
@@ -61,21 +61,6 @@
                         META-INF/maven/**/*,
                         org/apache/olingo/odata2/api/uri/expression/MethodOperator.*
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Import-Package>
-                            !org.apache.olingo.odata2.api.*,
-                            *
-                        </Import-Package>
-                        <Export-Package>
-                            org.apache.olingo.odata2.api.*
-                        </Export-Package>
-                    </instructions>
                 </configuration>
             </plugin>
         </plugins>
