@@ -44,7 +44,7 @@
         <avro.version>1.11.4</avro.version>
         <bookkeeper.version>4.14.5</bookkeeper.version> <!-- pulsar-client.version bound -->
         <bouncycastle.version>1.78.1</bouncycastle.version>
-        <cometd.version>3.0.10</cometd.version>
+        <cometd.version>3.1.14</cometd.version>
         <commons-beanutils.version>1.10.1</commons-beanutils.version>
         <commons-codec.version>1.18.0</commons-codec.version>
         <commons-collections.version>3.2.2</commons-collections.version>
