@@ -48,7 +48,7 @@
         <commons-compress.version>1.26.2</commons-compress.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-digester.version>1.8.1</commons-digester.version>
-        <commons-io.version>2.15.1</commons-io.version>
+        <commons-io.version>2.19.0</commons-io.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
         <gson.version>2.12.1</gson.version>
         <guava.version>33.4.6-jre</guava.version>
