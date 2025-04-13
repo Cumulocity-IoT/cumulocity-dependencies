@@ -40,7 +40,7 @@
         <nexus.basePath>/nexus/content/repositories</nexus.basePath>
 
         <!-- COMPILE DEPENDENCIES VERSIONS -->
-        <aircompressor.version>0.27</aircompressor.version>
+        <aircompressor.version>2.0.2</aircompressor.version>
         <avro.version>1.11.4</avro.version>
         <bookkeeper.version>4.14.5</bookkeeper.version> <!-- pulsar-client.version bound -->
         <bouncycastle.version>1.78.1</bouncycastle.version>
