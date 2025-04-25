@@ -67,7 +67,7 @@
         <pulsar-client.version>2.8.4</pulsar-client.version>
         <rs-api.version>2.1.6</rs-api.version>
         <slf4j.version>1.7.36</slf4j.version>
-        <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound -->
+        <snakeyaml.version>2.4</snakeyaml.version> <!-- cxf.version bound -->
         <spring.version>5.3.39</spring.version> <!-- requires respective ServiceMix bundle https://mvnrepository.com/artifact/org.apache.servicemix.bundles/org.apache.servicemix.bundles.spring-core -->
         <svenson.version>1.6.1</svenson.version>
 
