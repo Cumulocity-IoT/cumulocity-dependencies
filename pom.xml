@@ -69,7 +69,7 @@
         <json-path.version>2.8.0</json-path.version> <!-- overridden down -->
         <kubernetes-client.version>7.3.1</kubernetes-client.version>
         <odata.version>2.0.13</odata.version>
-        <okhttp.version>3.12.12</okhttp.version> <!-- overridden down -->
+        <okhttp.version>4.12.0</okhttp.version> <!-- overridden down -->
         <protobuf.version>4.35.1</protobuf.version>
         <pulsar-client.version>2.10.4</pulsar-client.version> <!-- overridden down -->
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound --> <!-- overridden down -->
