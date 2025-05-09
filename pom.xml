@@ -73,6 +73,7 @@
         <slf4j.version>1.7.36</slf4j.version>
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound -->
         <spring-framework.version>5.3.39</spring-framework.version>
+        <sundr.version>0.50.1</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.1</svenson.version>
 
         <!-- PROVIDED DEPENDENCIES -->
@@ -179,6 +180,61 @@
                 <groupId>io.airlift</groupId>
                 <artifactId>aircompressor</artifactId>
                 <version>${aircompressor.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>builder-annotations</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-adapter-api</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-adapter-reflect</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-core</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-codegen-api</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-codegen-apt</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-model-base</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-model-repo</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>sundr-model-utils</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>resourcecify-annotations</artifactId>
+                <version>${sundr.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.sundr</groupId>
+                <artifactId>transform-annotations</artifactId>
+                <version>${sundr.version}</version>
             </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
