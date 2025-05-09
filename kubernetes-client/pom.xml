@@ -15,10 +15,6 @@
     <name>Cumulocity :: Dependencies :: Patched :: Kubernetes :: Java Client</name>
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
-    <properties>
-        <sundr.version>0.50.1</sundr.version>
-    </properties>
-
     <dependencies>
         <!-- Overridden -->
         <dependency>
@@ -165,33 +161,19 @@
         <dependency>
             <groupId>io.sundr</groupId>
             <artifactId>builder-annotations</artifactId>
-            <version>${sundr.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.sun</groupId>
-                    <artifactId>tools</artifactId>
-                </exclusion>
-            </exclusions>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>io.sundr</groupId>
             <artifactId>transform-annotations</artifactId>
-            <version>${sundr.version}</version>
-            <scope>compile</scope>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>
             <version>1.12.0</version>
-            <scope>compile</scope>
-            <optional>true</optional>
+            <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
