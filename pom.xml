@@ -73,7 +73,7 @@
         <slf4j.version>1.7.36</slf4j.version>
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound -->
         <spring-framework.version>5.3.39</spring-framework.version>
-        <sundr.version>0.50.1</sundr.version> <!-- kubernetes-client.version bound -->
+        <sundr.version>0.200.3</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.1</svenson.version>
 
         <!-- PROVIDED DEPENDENCIES -->
