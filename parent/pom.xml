@@ -48,8 +48,10 @@
                                         <exclude>javax.activation:activation</exclude> <!-- moved to: jakarta.activation:jakarta.activation-api -->
                                         <exclude>javax.el</exclude> <!-- moved to: jakarta.el:jakarta.el-api -->
                                         <exclude>javax.mail</exclude> <!-- moved to: jakarta.mail:jakarta.mail-api -->
+                                        <exclude>javax.servlet:javax.servlet-api</exclude> <!-- moved to: jakarta.servlet:jakarta.servlet-api -->
                                         <exclude>javax.validation:validation-api</exclude> <!-- moved to: jakarta.validation:jakarta.validation-api -->
                                         <exclude>javax.ws.rs:javax.ws.rs-api</exclude> <!-- use jakarta.ws.rs:jakarta.ws.rs-api -->
+                                        <exclude>javax.websocket:javax.websocket-api</exclude> <!-- moved to: jakarta.websocket:jakarta.websocket-api -->
                                         <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
