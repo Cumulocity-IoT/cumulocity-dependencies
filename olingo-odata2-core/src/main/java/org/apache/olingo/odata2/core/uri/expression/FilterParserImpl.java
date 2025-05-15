@@ -209,7 +209,7 @@ public class FilterParserImpl implements FilterParser {
     } catch (TokenizerExpectError e) {
       // Internal parsing error, even if there are no more token (then there should be a different exception).
       // Tested with TestParserExceptions.TestPMreadParenthesis
-      throw FilterParserExceptionImpl.createMISSING_CLOSING_PHARENTHESIS(openParenthesis.getPosition(), curExpression,
+      throw FilterParserExceptionImpl.createMISSING_CLOSING_PARENTHESIS(openParenthesis.getPosition(), curExpression,
           e);
     }
     return parenthesisExpression;
@@ -246,7 +246,7 @@ public class FilterParserImpl implements FilterParser {
     while (token.getKind() != TokenKind.CLOSEPAREN) {
       if (readComma == false) {
         // Tested with TestParserExceptions.TestPMreadParameters CASE 12 e.g. "$filter=concat('a' 'b')"
-        throw FilterParserExceptionImpl.createCOMMA_OR_CLOSING_PHARENTHESIS_EXPECTED_AFTER_POS(tokenList
+        throw FilterParserExceptionImpl.createCOMMA_OR_CLOSING_PARENTHESIS_EXPECTED_AFTER_POS(tokenList
             .lookPrevToken(), curExpression);
       }
       expression = readElement(null);
@@ -264,7 +264,7 @@ public class FilterParserImpl implements FilterParser {
       token = tokenList.lookToken();
       if (token == null) {
         // Tested with TestParserExceptions.TestPMreadParameters CASE 2 e.g. "$filter=concat(123"
-        throw FilterParserExceptionImpl.createCOMMA_OR_CLOSING_PHARENTHESIS_EXPECTED_AFTER_POS(tokenList
+        throw FilterParserExceptionImpl.createCOMMA_OR_CLOSING_PARENTHESIS_EXPECTED_AFTER_POS(tokenList
             .lookPrevToken(), curExpression);
       }
 
