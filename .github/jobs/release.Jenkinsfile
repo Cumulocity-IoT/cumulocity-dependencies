@@ -15,7 +15,7 @@ pipeline {
   }
   environment {
     MVN_SETTINGS = credentials('maven-settings')
-    GIT_CREDENTIALS = credentials('tech-c8y-github-ghec')
+    GIT_CREDENTIALS = credentials('Cumulocity-jenkins-ghec')
   }
   stages {
     stage('Prepare') {
