@@ -575,11 +575,7 @@ public class OperationSupport {
         HttpResponse<InputStream> response = client.send(request, InputStream.class);
         if (numRetries < requestRetryBackoffLimit && response.code() >= 500) {
           retryInterval = retryIntervalCalculator.getInterval(numRetries);
-<<<<<<< task/MTM-63444/fabric8-update
           LOG.debug("HTTP operation on url: {} should be retried as the response code was {}, retrying after {} millis", request.uri(), response.code(), retryInterval);
-=======
-          LOG.debug("HTTP operation on url: {} should be retried as the response code was {}, retrying after {} millis", request.url(), response.code(), retryInterval);
->>>>>>> develop
           if (response.body() != null) {
             response.body().close();
           }
