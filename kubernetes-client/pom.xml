@@ -211,7 +211,7 @@
                         META-INF/MANIFEST.MF,
                         META-INF/maven,
                         META-INF/maven/**/*,
-                        io/fabric8/kubernetes/client/dsl/base/internal/OperationSupport.*
+                        io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*
                     </excludes>
                 </configuration>
             </plugin>
