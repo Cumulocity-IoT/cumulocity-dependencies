@@ -30,6 +30,7 @@ import io.fabric8.kubernetes.api.model.extensions.DeploymentRollback;
 import io.fabric8.kubernetes.client.Client;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.KubernetesClientException;
+import io.fabric8.kubernetes.client.dsl.FieldValidateable.Validation;
 import io.fabric8.kubernetes.client.dsl.base.PatchContext;
 import io.fabric8.kubernetes.client.dsl.base.PatchType;
 import io.fabric8.kubernetes.client.http.HttpClient;
@@ -47,6 +48,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InterruptedIOException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -58,9 +60,12 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public class OperationSupport {
 
+  private static final long ADDITIONAL_REQEUST_TIMEOUT = TimeUnit.SECONDS.toMillis(5);
+  private static final String FIELD_MANAGER_PARAM = "?fieldManager=";
   public static final String JSON = "application/json";
   public static final String JSON_PATCH = "application/json-patch+json";
   public static final String STRATEGIC_MERGE_JSON_PATCH = "application/strategic-merge-patch+json";
@@ -202,7 +207,11 @@ public class OperationSupport {
 
   public URL getResourceURLForWriteOperation(URL resourceURL) throws MalformedURLException {
     if (dryRun) {
-      return new URL(URLUtils.join(resourceURL.toString(), "?dryRun=All"));
+      resourceURL = new URL(URLUtils.join(resourceURL.toString(), "?dryRun=All"));
+    }
+    if (context.fieldValidation != null) {
+      resourceURL = new URL(
+              URLUtils.join(resourceURL.toString(), "?fieldValidation=" + context.fieldValidation.parameterValue()));
     }
     return resourceURL;
   }
@@ -210,21 +219,33 @@ public class OperationSupport {
   public URL getResourceURLForPatchOperation(URL resourceUrl, PatchContext patchContext) throws MalformedURLException {
     if (patchContext != null) {
       String url = resourceUrl.toString();
-      if (patchContext.getForce() != null) {
-        url = URLUtils.join(url, "?force=" + patchContext.getForce());
+      Boolean forceConflicts = patchContext.getForce();
+
+      if (forceConflicts == null) {
+        forceConflicts = this.context.forceConflicts;
+      }
+      if (forceConflicts != null) {
+        url = URLUtils.join(url, "?force=" + forceConflicts);
       }
       if ((patchContext.getDryRun() != null && !patchContext.getDryRun().isEmpty()) || dryRun) {
         url = URLUtils.join(url, "?dryRun=All");
       }
       String fieldManager = patchContext.getFieldManager();
+      if (fieldManager == null) {
+        fieldManager = this.context.fieldManager;
+      }
       if (fieldManager == null && patchContext.getPatchType() == PatchType.SERVER_SIDE_APPLY) {
         fieldManager = "fabric8";
       }
       if (fieldManager != null) {
-        url = URLUtils.join(url, "?fieldManager=" + fieldManager);
+        url = URLUtils.join(url, FIELD_MANAGER_PARAM + fieldManager);
       }
-      if (patchContext.getFieldValidation() != null) {
-        url = URLUtils.join(url, "?fieldValidation=" + patchContext.getFieldValidation());
+      String fieldValidation = patchContext.getFieldValidation();
+      if (fieldValidation == null && this.context.fieldValidation != null) {
+        fieldValidation = this.context.fieldValidation.parameterValue();
+      }
+      if (fieldValidation != null) {
+        url = URLUtils.join(url, "?fieldValidation=" + fieldValidation);
       }
       return new URL(url);
     }
@@ -344,7 +365,7 @@ public class OperationSupport {
     HttpRequest.Builder requestBuilder = httpClient.newHttpRequestBuilder()
             .put(JSON, JSON_MAPPER.writeValueAsString(updated))
             .url(getResourceURLForWriteOperation(getResourceUrl(checkNamespace(updated), checkName(updated), status)));
-    return handleResponse(requestBuilder, type, getParameters());
+    return handleResponse(requestBuilder, type);
   }
 
   /**
@@ -460,11 +481,7 @@ public class OperationSupport {
    */
   protected <T> T handleGet(URL resourceUrl, Class<T> type) throws InterruptedException, IOException {
     HttpRequest.Builder requestBuilder = httpClient.newHttpRequestBuilder().url(resourceUrl);
-    return handleResponse(requestBuilder, type, getParameters());
-  }
-
-  protected Map<String, String> getParameters() {
-    return Collections.emptyMap();
+    return handleResponse(requestBuilder, type);
   }
 
   protected <T extends HasMetadata> T handleApproveOrDeny(T csr, Class<T> type) throws IOException, InterruptedException {
@@ -497,7 +514,11 @@ public class OperationSupport {
    */
   protected <T> T waitForResult(CompletableFuture<T> future) throws IOException {
     try {
-      // readTimeout should be enforced
+      // since readTimeout may not be enforced in a timely manner at the httpclient, we'll
+      // enforce a higher level timeout with a small amount of padding to account for possible queuing
+      if (config.getRequestTimeout() > 0) {
+        return future.get(config.getRequestTimeout() + ADDITIONAL_REQEUST_TIMEOUT, TimeUnit.MILLISECONDS);
+      }
       return future.get();
     } catch (InterruptedException e) {
       Thread.currentThread().interrupt();
@@ -517,6 +538,9 @@ public class OperationSupport {
         throw ((KubernetesClientException) t).copyAsCause();
       }
       throw new KubernetesClientException(t.getMessage(), t);
+    } catch (TimeoutException e) {
+      future.cancel(true);
+      throw KubernetesClientException.launderThrowable(e);
     }
   }
 
@@ -528,27 +552,15 @@ public class OperationSupport {
    * @param <T> template argument provided
    *
    * @return Returns a de-serialized object as api server response of provided type.
-   * @throws InterruptedException Interrupted Exception
    * @throws IOException IOException
    */
-  protected <T> T handleResponse(HttpRequest.Builder requestBuilder, Class<T> type) throws InterruptedException, IOException {
-    return handleResponse(requestBuilder, type, getParameters());
-  }
-
-  /**
-   * Send an http request and handle the response, optionally performing placeholder substitution to the response.
-   *
-   * @param requestBuilder request builder
-   * @param type type of object
-   * @param parameters a hashmap containing parameters
-   * @param <T> template argument provided
-   *
-   * @return Returns a de-serialized object as api server response of provided type.
-   * @throws IOException IOException
-   */
-  private <T> T handleResponse(HttpRequest.Builder requestBuilder, Class<T> type, Map<String, String> parameters)
-          throws IOException {
-    return waitForResult(handleResponse(httpClient, requestBuilder, type, parameters));
+  protected <T> T handleResponse(HttpRequest.Builder requestBuilder, Class<T> type) throws IOException {
+    return waitForResult(handleResponse(httpClient, requestBuilder, new TypeReference<T>() {
+      @Override
+      public Type getType() {
+        return type;
+      }
+    }));
   }
 
   /**
@@ -557,13 +569,12 @@ public class OperationSupport {
    * @param client the client
    * @param requestBuilder Request builder
    * @param type Type of object provided
-   * @param parameters A hashmap containing parameters
    * @param <T> Template argument provided
    *
    * @return Returns a de-serialized object as api server response of provided type.
    */
-  protected <T> CompletableFuture<T> handleResponse(HttpClient client, HttpRequest.Builder requestBuilder, Class<T> type,
-                                                    Map<String, String> parameters) {
+  protected <T> CompletableFuture<T> handleResponse(HttpClient client, HttpRequest.Builder requestBuilder,
+                                                    TypeReference<T> type) {
     VersionUsageUtils.log(this.resourceT, this.apiGroupVersion);
     HttpRequest request = requestBuilder.build();
     CompletableFuture<HttpResponse<byte[]>> futureResponse = new CompletableFuture<>();
@@ -574,8 +585,8 @@ public class OperationSupport {
     return futureResponse.thenApply(response -> {
       try {
         assertResponseCode(request, response);
-        if (type != null) {
-          return Serialization.unmarshal(new ByteArrayInputStream(response.body()), type, parameters);
+        if (type != null && type.getType() != null) {
+          return Serialization.unmarshal(new ByteArrayInputStream(response.body()), type);
         } else {
           return null;
         }
@@ -627,6 +638,14 @@ public class OperationSupport {
    * @param response The {@link HttpResponse} object.
    */
   protected void assertResponseCode(HttpRequest request, HttpResponse<?> response) {
+    List<String> warnings = response.headers("Warning");
+    if (warnings != null && !warnings.isEmpty()) {
+      if (context.fieldValidation == Validation.WARN) {
+        LOG.warn("Recieved warning(s) from request {}: {}", request.uri(), warnings);
+      } else {
+        LOG.debug("Recieved warning(s) from request {}: {}", request.uri(), warnings);
+      }
+    }
     if (response.isSuccessful()) {
       return;
     }
@@ -770,9 +789,6 @@ public class OperationSupport {
         throw e;
       }
       return null;
-    } catch (InterruptedException ie) {
-      Thread.currentThread().interrupt();
-      throw KubernetesClientException.launderThrowable(ie);
     } catch (IOException e) {
       throw KubernetesClientException.launderThrowable(e);
     }

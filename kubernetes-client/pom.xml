@@ -29,7 +29,7 @@
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-httpclient-okhttp</artifactId>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.fabric8</groupId>
