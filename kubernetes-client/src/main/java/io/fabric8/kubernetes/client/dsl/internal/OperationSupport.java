@@ -602,9 +602,6 @@ public class OperationSupport {
       } catch (IOException | RuntimeException e) {
         LOG.debug("Exception convertion response to Status", e);
       }
-      } catch (Exception e) {
-        return createStatus(500, "Unknown error");
-      }
       if (response.message() != null) {
         statusMessage = response.message();
       }
