@@ -687,8 +687,11 @@ public class OperationSupport {
         }
       } catch (IOException e) {
         // ignored
+
+      // C8Y PATCH - BEGIN
       } catch (Exception e) {
         return createStatus(500, "Unknown error");
+      // C8Y PATCH - END
       }
       if (response.message() != null) {
         statusMessage = response.message();
