@@ -31,10 +31,6 @@
             <artifactId>kubernetes-httpclient-okhttp</artifactId>
             <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.fabric8</groupId>-->
-<!--            <artifactId>kubernetes-model</artifactId>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-core</artifactId>
