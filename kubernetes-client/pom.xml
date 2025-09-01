@@ -217,7 +217,7 @@
                         META-INF/maven,
                         META-INF/maven/**/*,
                         io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*,
-                        io/fabric8/kubernetes/client/osgi/.*
+                        io/fabric8/kubernetes/client/osgi/*.*
                     </excludes>
                 </configuration>
             </plugin>
