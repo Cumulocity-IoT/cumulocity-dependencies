@@ -104,11 +104,6 @@
             <artifactId>kubernetes-model-node</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.service.component.annotations</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
@@ -221,7 +216,8 @@
                         META-INF/MANIFEST.MF,
                         META-INF/maven,
                         META-INF/maven/**/*,
-                        io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*
+                        io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*,
+                        io/fabric8/kubernetes/client/osgi/ManagedKubernetesClient.*
                     </excludes>
                 </configuration>
             </plugin>
