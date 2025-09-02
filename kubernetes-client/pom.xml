@@ -33,10 +33,6 @@
         </dependency>
         <dependency>
             <groupId>io.fabric8</groupId>
-            <artifactId>kubernetes-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.fabric8</groupId>
             <artifactId>kubernetes-model-core</artifactId>
         </dependency>
         <dependency>
@@ -220,7 +216,8 @@
                         META-INF/MANIFEST.MF,
                         META-INF/maven,
                         META-INF/maven/**/*,
-                        io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*
+                        io/fabric8/kubernetes/client/dsl/internal/OperationSupport.*,
+                        io/fabric8/kubernetes/client/osgi/*
                     </excludes>
                 </configuration>
             </plugin>
