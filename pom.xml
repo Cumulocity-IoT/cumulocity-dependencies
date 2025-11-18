@@ -54,6 +54,7 @@
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-io.version>2.20.0</commons-io.version>
         <commons-lang3.version>3.17.0</commons-lang3.version>
+        <errorprone.version>2.43.0</errorprone.version> <!-- guava.version & caffeine.version bound -->
         <gson.version>2.12.1</gson.version>
         <guava.version>33.5.0-jre</guava.version>
         <hk2.version>2.6.1</hk2.version> <!-- pulsar-client.version bound -->
@@ -128,6 +129,11 @@
                 <groupId>com.google.code.svenson</groupId>
                 <artifactId>svenson</artifactId>
                 <version>${svenson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.errorprone</groupId>
+                <artifactId>error_prone_annotations</artifactId>
+                <version>${errorprone.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
