@@ -79,8 +79,6 @@
                     <excludes>
                         META-INF/MANIFEST.MF,
                         META-INF/maven/**/*,
-                        org/apache/olingo/odata2/core/ep/consumer/XmlEntryConsumer.*,
-                        org/apache/olingo/odata2/core/ep/consumer/XmlPropertyConsumer.*,
                         org/apache/olingo/odata2/core/uri/expression/Tokenizer.*,
                         org/apache/olingo/odata2/core/uri/expression/FilterParserImpl.*
                     </excludes>
