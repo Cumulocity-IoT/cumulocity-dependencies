@@ -34,12 +34,11 @@ import org.apache.olingo.odata2.core.edm.EdmSimpleTypeFacadeImpl;
  */
 public class Tokenizer {
 
-  // Pattern OTHER_LIT = Pattern.compile("^([[A-Za-z0-9]._~%!$&*+;:@-]+)");
   private static final Pattern OTHER_LIT = Pattern.compile("(?:\\p{L}|\\p{Digit}|[-._~%!$&*+;:@])+");
   private static final Pattern FUNK =
-      Pattern
-          .compile("^(startswith|endswith|substring|substring|substringof|indexof|replace|tolower|toupper" +
-              "|trim|concat|length|year|mounth|day|hour|minute|second|round|ceiling|floor|has|hasany|bygroupid|isinhierarchyof)( *)\\(");
+          Pattern
+                  .compile("^(startswith|endswith|substring|substring|substringof|indexof|replace|tolower|toupper" +
+                          "|trim|concat|length|year|mounth|day|hour|minute|second|round|ceiling|floor|has|hasany|bygroupid|isinhierarchyof)( *)\\(");
   private static final Pattern AND_SUB1 = Pattern.compile("^(add|sub|mul|div|mod|not) ");
   private static final Pattern AND_SUB = Pattern.compile("^(and|or|eq|ne|lt|gt|le|ge) ");
   private static final Pattern prefix = Pattern.compile("^(X|binary|guid|datetime|datetimeoffset|time)'");
@@ -83,77 +82,77 @@ public class Tokenizer {
 
       curCharacter = expression.charAt(curPosition);
       switch (curCharacter) {
-      case ' ':
-        // count whitespace and move pointer to next non-whitespace char
-        eatWhiteSpaces(curPosition, curCharacter);
-        break;
-
-      case '(':
-        tokens.appendToken(curPosition, TokenKind.OPENPAREN, curCharacter);
-        curPosition = curPosition + 1;
-
-        break;
-
-      case ')':
-        tokens.appendToken(curPosition, TokenKind.CLOSEPAREN, curCharacter);
-        curPosition = curPosition + 1;
-        break;
-
-      case '\'':
-        token = "";
-        readLiteral(curCharacter);
-
-        break;
-
-      case ',':
-        tokens.appendToken(oldPosition, TokenKind.COMMA, curCharacter);
-        curPosition = curPosition + 1;
-        break;
-
-      case '=':
-      case '/':
-      case '?':
-      case '.':
-      case '*':
-        curPosition = curPosition + 1;
-        tokens.appendToken(oldPosition, TokenKind.SYMBOL, curCharacter);
-        break;
-
-      default:
-        String rem_expr = expression.substring(curPosition); // remaining expression
-
-        boolean isBinary = checkForBinary(oldPosition, rem_expr);
-        if (isBinary) {
+        case ' ':
+          // count whitespace and move pointer to next non-whitespace char
+          eatWhiteSpaces(curPosition, curCharacter);
           break;
-        }
 
-        // check for prefixes like X, binary, guid, datetime
-        boolean isPrefix = checkForPrefix(rem_expr);
-        if (isPrefix) {
-          break;
-        }
+        case '(':
+          tokens.appendToken(curPosition, TokenKind.OPENPAREN, curCharacter);
+          curPosition = curPosition + 1;
 
-        // check for math
-        boolean isMath = checkForMath(oldPosition, rem_expr);
-        if (isMath) {
           break;
-        }
 
-        // check for function
-        boolean isFunction = checkForMethod(oldPosition, rem_expr);
-        if (isFunction) {
+        case ')':
+          tokens.appendToken(curPosition, TokenKind.CLOSEPAREN, curCharacter);
+          curPosition = curPosition + 1;
           break;
-        }
 
-        boolean isBoolean = checkForBoolean(oldPosition, rem_expr);
-        if (isBoolean) {
-          break;
-        }
+        case '\'':
+          token = "";
+          readLiteral(curCharacter);
 
-        boolean isLiteral = checkForLiteral(oldPosition, curCharacter, rem_expr);
-        if (isLiteral) {
           break;
-        }
+
+        case ',':
+          tokens.appendToken(oldPosition, TokenKind.COMMA, curCharacter);
+          curPosition = curPosition + 1;
+          break;
+
+        case '=':
+        case '/':
+        case '?':
+        case '.':
+        case '*':
+          curPosition = curPosition + 1;
+          tokens.appendToken(oldPosition, TokenKind.SYMBOL, curCharacter);
+          break;
+
+        default:
+          String rem_expr = expression.substring(curPosition); // remaining expression
+
+          boolean isBinary = checkForBinary(oldPosition, rem_expr);
+          if (isBinary) {
+            break;
+          }
+
+          // check for prefixes like X, binary, guid, datetime
+          boolean isPrefix = checkForPrefix(rem_expr);
+          if (isPrefix) {
+            break;
+          }
+
+          // check for math
+          boolean isMath = checkForMath(oldPosition, rem_expr);
+          if (isMath) {
+            break;
+          }
+
+          // check for function
+          boolean isFunction = checkForMethod(oldPosition, rem_expr);
+          if (isFunction) {
+            break;
+          }
+
+          boolean isBoolean = checkForBoolean(oldPosition, rem_expr);
+          if (isBoolean) {
+            break;
+          }
+
+          boolean isLiteral = checkForLiteral(oldPosition, curCharacter, rem_expr);
+          if (isLiteral) {
+            break;
+          }
 
         token = Character.toString(curCharacter);
         throw TokenizerException.createUNKNOWN_CHARACTER(oldPosition, token, expression);
@@ -194,10 +193,10 @@ public class Tokenizer {
 
   private boolean checkForBoolean(final int oldPosition, final String rem_expr) {
     boolean isBoolean = false;
-    if (rem_expr.equals("true") || rem_expr.equals("false")) {
+    if ("true".equals(rem_expr) || "false".equals(rem_expr)) {
       curPosition = curPosition + rem_expr.length();
       tokens.appendEdmTypedToken(oldPosition, TokenKind.SIMPLE_TYPE, rem_expr, new EdmLiteral(EdmSimpleTypeFacadeImpl
-          .getEdmSimpleType(EdmSimpleTypeKind.Boolean), rem_expr));
+              .getEdmSimpleType(EdmSimpleTypeKind.Boolean), rem_expr));
       isBoolean = true;
     }
     return isBoolean;

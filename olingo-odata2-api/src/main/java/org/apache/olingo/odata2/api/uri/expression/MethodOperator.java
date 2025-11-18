@@ -43,6 +43,7 @@ public enum MethodOperator {
   ROUND("round"),
   FLOOR("floor"),
   CEILING("ceiling"),
+  REPLACE("replace"),
   HAS("has"),
   HASANY("hasany"),
   BY_GROUPID("bygroupid"),
