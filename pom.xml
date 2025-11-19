@@ -78,7 +78,6 @@
         <svenson.version>1.6.1</svenson.version>
 
         <!-- PROVIDED DEPENDENCIES -->
-        <findbugs.version>1.3.7</findbugs.version>
         <lombok.version>1.18.38</lombok.version>
 
         <!-- CHILD MODULES VERSIONS -->
@@ -364,14 +363,6 @@
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
                 <version>${javassist.version}</version>
-            </dependency>
-
-            <!-- PROVIDED DEPENDENCIES -->
-            <dependency>
-                <groupId>net.sourceforge.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>${findbugs.version}</version>
-                <scope>provided</scope>
             </dependency>
 
             <!-- CHILD MODULES -->
