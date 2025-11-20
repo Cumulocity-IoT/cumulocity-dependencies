@@ -20,9 +20,9 @@ import org.cometd.server.BayeuxServerImpl;
 import org.cometd.server.ServerSessionImpl;
 import org.eclipse.jetty.util.Utf8StringBuilder;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.text.ParseException;
