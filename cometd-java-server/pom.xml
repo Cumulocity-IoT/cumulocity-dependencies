@@ -149,6 +149,31 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>replace-javax-to-jakarta</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replace dir="${unpack.source.directory}">
+                                    <include name="**/*.java"/>
+                                    <replacefilter token="javax.servlet" value="jakarta.servlet" />
+                                    <replacefilter token="javax.websocket" value="jakarta.websocket" />
+                                </replace>
+                                <chmod dir="${unpack.source.directory}" perm="644">
+                                    <include name="**/*.java"/> <!-- restore permissions lost by replace above -->
+                                </chmod>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <skipMain>false</skipMain>

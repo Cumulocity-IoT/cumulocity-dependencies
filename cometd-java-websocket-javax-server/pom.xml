@@ -12,7 +12,7 @@
     <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
     <artifactId>cometd-java-websocket-javax-server</artifactId>
     <version>${osgi.cometd.version}</version>
-    <name>Cumulocity :: Dependencies :: Patched :: CometD :: Java WebSocket Server</name>
+    <name>Cumulocity :: Dependencies :: Patched :: CometD :: Java WebSocket Javax Server</name>
     <url>http://startups.jira.com/wiki/display/MTM/Home</url>
 
     <dependencies>
@@ -28,6 +28,10 @@
         <dependency>
             <groupId>jakarta.websocket</groupId>
             <artifactId>jakarta.websocket-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.websocket</groupId>
+            <artifactId>jakarta.websocket-client-api</artifactId>
         </dependency>
     </dependencies>
 
@@ -56,13 +60,38 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <configuration>
                     <includeGroupIds>org.cometd.java</includeGroupIds>
-                    <includeArtifactIds>cometd-java-websocket-javax-server</includeArtifactIds>
+                    <includeArtifactIds>cometd-java-websocket-common-server,cometd-java-websocket-javax-server</includeArtifactIds>
                     <excludes>
                         META-INF/MANIFEST.MF,
                         META-INF/maven/**/*,
                         org/cometd/websocket/server/WebSocketTransport.*
                     </excludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>replace-javax-to-jakarta</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <replace dir="${unpack.source.directory}">
+                                    <include name="**/*.java"/>
+                                    <replacefilter token="javax.servlet" value="jakarta.servlet" />
+                                    <replacefilter token="javax.websocket" value="jakarta.websocket" />
+                                </replace>
+                                <chmod dir="${unpack.source.directory}" perm="644">
+                                    <include name="**/*.java"/> <!-- restore permissions lost by replace above -->
+                                </chmod>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
