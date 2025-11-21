@@ -131,7 +131,7 @@ public class WebSocketTransport extends AbstractWebSocketTransport<Session> {
         });
     }
 
-    private class WebSocketScheduler extends Endpoint implements AbstractServerTransport.Scheduler, MessageHandler.Whole<String> {
+    public class WebSocketScheduler extends Endpoint implements AbstractServerTransport.Scheduler, MessageHandler.Whole<String> {
         private final AbstractWebSocketScheduler delegate;
         private volatile Session _wsSession;
 
@@ -226,7 +226,7 @@ public class WebSocketTransport extends AbstractWebSocketTransport<Session> {
         }
     }
 
-    private class WebSocketContext extends AbstractBayeuxContext {
+    public class WebSocketContext extends AbstractBayeuxContext {
         private WebSocketContext(ServletContext context, HandshakeRequest request, Map<String, Object> userProperties) {
             super(context, request.getRequestURI().toString(), request.getQueryString(), request.getHeaders(),
                     request.getParameterMap(), request.getUserPrincipal(), (HttpSession) request.getHttpSession(),
@@ -246,7 +246,7 @@ public class WebSocketTransport extends AbstractWebSocketTransport<Session> {
         return locales;
     }
 
-    private class Configurator extends ServerEndpointConfig.Configurator {
+    public class Configurator extends ServerEndpointConfig.Configurator {
         private final ServletContext servletContext;
 
         private Configurator(ServletContext servletContext) {
@@ -307,7 +307,7 @@ public class WebSocketTransport extends AbstractWebSocketTransport<Session> {
         }
     }
 
-    private static class ContextHolder {
+    public static class ContextHolder {
         private static final ThreadLocal<ContextHolder> holder = new ThreadLocal<>();
         private WebSocketContext bayeuxContext;
         private boolean protocolMatches;

@@ -199,13 +199,8 @@ public abstract class AbstractServerTransport extends AbstractTransport implemen
     }
 
     @Override
-    public String dump() {
-        return ContainerLifeCycle.dump(this);
-    }
-
-    @Override
     public void dump(Appendable out, String indent) throws IOException {
-        ContainerLifeCycle.dumpObject(out, this);
+        Dumpable.dumpObject(out, this);
     }
 
     @Override
