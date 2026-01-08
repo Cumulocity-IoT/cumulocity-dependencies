@@ -135,6 +135,7 @@
                     <excludes>
                         META-INF/MANIFEST.MF,
                         META-INF/maven/**/*,
+                        org/cometd/server/AbstractServerTransport.*,
                         org/cometd/server/BayeuxServerImpl.*,
                         org/cometd/server/ServerSessionImpl.*,
                         org/cometd/server/ServerChannelImpl.*,
