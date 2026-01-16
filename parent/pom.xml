@@ -56,6 +56,7 @@
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
+                                        <exclude>org.bouncycastle:*-jdk15on</exclude> <!-- use: org.bouncycastle:*-jdk18on -->
                                         <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
                                         <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
                                     </excludes>

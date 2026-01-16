@@ -27,6 +27,7 @@
         <module>kubernetes-client</module>
         <module>olingo-odata2-api</module>
         <module>olingo-odata2-core</module>
+        <module>pulsar-client-admin-original</module>
         <module>pulsar-client-original</module>
         <module>svenson</module>
     </modules>
@@ -60,6 +61,7 @@
         <hk2.version>2.6.1</hk2.version> <!-- pulsar-client.version bound -->
 <!--        <jackson-bom.version>2.14.1</jackson-bom.version> &lt;!&ndash; cxf.version bound &ndash;&gt;-->
         <javassist.version>3.30.2-GA</javassist.version>
+        <jersey.version>3.0.18</jersey.version>
         <jetty.version>11.0.26</jetty.version>
         <joda-time.version>2.14.0</joda-time.version>
         <json-path.version>2.8.0</json-path.version>
@@ -278,6 +280,23 @@
                 <artifactId>bouncy-castle-bc</artifactId>
                 <version>${pulsar-client.version}</version>
                 <classifier>pkg</classifier>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.pulsar</groupId>
+                <artifactId>bouncy-castle-bc</artifactId>
+                <version>${pulsar-client.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.apache.pulsar</groupId>
@@ -391,6 +410,11 @@
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>olingo-odata2-core</artifactId>
                 <version>${osgi.odata.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+                <artifactId>pulsar-client-admin-original</artifactId>
+                <version>${osgi.pulsar-client.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
