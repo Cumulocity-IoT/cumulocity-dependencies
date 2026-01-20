@@ -41,6 +41,7 @@
                                 <banDuplicatePomDependencyVersions />
                                 <bannedDependencies>
                                     <excludes>
+                                        <exclude>ch.qos.logback</exclude> <!-- use log4j instead -->
                                         <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
                                         <exclude>com.sun.activation:javax.activation</exclude> <!-- moved to: com.sun.activation:jakarta.activation -->
                                         <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
@@ -54,12 +55,14 @@
                                         <exclude>javax.ws.rs:javax.ws.rs-api</exclude> <!-- use jakarta.ws.rs:jakarta.ws.rs-api -->
                                         <exclude>javax.websocket:javax.websocket-api</exclude> <!-- moved to: jakarta.websocket:jakarta.websocket-api -->
                                         <exclude>javax.xml.bind:jaxb-api</exclude> <!-- moved to: jakarta.xml.bind:jakarta.xml.bind-api -->
+                                        <exclude>org.apache.logging.log4j:*:[1,2)</exclude> <!-- use Log4j 2 -->
                                         <exclude>org.apache.olingo:olingo-odata2-api</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-api -->
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
                                         <exclude>org.bouncycastle:*-jdk15on</exclude> <!-- use: org.bouncycastle:*-jdk18on -->
                                         <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
                                         <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
+                                        <exclude>org.slf4j:*:[1,2)</exclude> <!-- use SLF4j 2 -->
                                     </excludes>
                                     <includes>
                                         <include>com.google.code.svenson:svenson:provided</include>
