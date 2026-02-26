@@ -42,6 +42,7 @@
                                 <bannedDependencies>
                                     <excludes>
                                         <exclude>com.google.code.svenson:svenson</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:svenson -->
+                                        <exclude>com.sun.activation:javax.activation</exclude> <!-- moved to: com.sun.activation:jakarta.activation -->
                                         <exclude>com.sun.xml.bind:jaxb-impl</exclude> <!-- moved to: org.glassfish.jaxb:jaxb-runtime -->
                                         <exclude>commons-logging:commons-logging</exclude> <!-- in favor of SLF4j -->
                                         <exclude>io.fabric8:kubernetes-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:kubernetes-client -->
