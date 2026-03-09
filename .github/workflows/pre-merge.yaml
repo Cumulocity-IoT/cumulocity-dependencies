@@ -23,7 +23,7 @@ jobs:
 
       - name: Get PR number
         id: pr_number
-        uses: kamatama41/get-pr-number-action@v0
+        uses: kamatama41/get-pr-number-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
