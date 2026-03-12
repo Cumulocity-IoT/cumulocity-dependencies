@@ -76,6 +76,7 @@
         <sun-activation.version>1.2.2</sun-activation.version>
         <sundr.version>0.200.4</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.1</svenson.version>
+        <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
 
         <!-- PROVIDED DEPENDENCIES -->
         <lombok.version>1.18.38</lombok.version>
