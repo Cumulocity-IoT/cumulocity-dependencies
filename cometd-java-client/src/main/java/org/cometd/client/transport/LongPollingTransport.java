@@ -33,12 +33,12 @@ import java.util.regex.Pattern;
 import org.cometd.bayeux.Channel;
 import org.cometd.bayeux.Message;
 import org.cometd.common.TransportException;
+import org.eclipse.jetty.client.BufferingResponseListener;
 import org.eclipse.jetty.client.HttpClient;
-import org.eclipse.jetty.client.api.Request;
-import org.eclipse.jetty.client.api.Response;
-import org.eclipse.jetty.client.api.Result;
-import org.eclipse.jetty.client.util.BufferingResponseListener;
-import org.eclipse.jetty.client.util.StringContentProvider;
+import org.eclipse.jetty.client.Request;
+import org.eclipse.jetty.client.Response;
+import org.eclipse.jetty.client.Result;
+import org.eclipse.jetty.client.StringRequestContent;
 import org.eclipse.jetty.http.HttpField;
 import org.eclipse.jetty.http.HttpHeader;
 import org.eclipse.jetty.http.HttpMethod;
@@ -125,16 +125,16 @@ public class LongPollingTransport extends HttpClientTransport {
         }
 
         final Request request = _httpClient.newRequest(url).method(HttpMethod.POST);
-        request.header(HttpHeader.CONTENT_TYPE.asString(), "application/json;charset=UTF-8");
+        request.headers(h -> h.put(HttpHeader.CONTENT_TYPE, "application/json;charset=UTF-8"));
 
         StringBuilder builder = new StringBuilder();
         for (HttpCookie cookie : getCookieStore().get(uri)) {
             builder.setLength(0);
             builder.append(cookie.getName()).append("=").append(cookie.getValue());
-            request.header(HttpHeader.COOKIE.asString(), builder.toString());
+            request.headers(h -> h.add(HttpHeader.COOKIE, builder.toString()));
         }
 
-        request.content(new StringContentProvider(generateJSON(messages)));
+        request.body(new StringRequestContent("application/json;charset=UTF-8", generateJSON(messages)));
 
         customize(request);
 
@@ -145,12 +145,7 @@ public class LongPollingTransport extends HttpClientTransport {
             _requests.add(request);
         }
 
-        request.listener(new Request.Listener.Adapter() {
-            @Override
-            public void onHeaders(Request request) {
-                listener.onSending(messages);
-            }
-        });
+        request.onRequestHeaders(req -> listener.onSending(messages));
 
         long maxNetworkDelay = getMaxNetworkDelay();
         if (messages.size() == 1) {
@@ -176,18 +171,19 @@ public class LongPollingTransport extends HttpClientTransport {
         request.timeout(maxNetworkDelay, TimeUnit.MILLISECONDS);
         request.send(new BufferingResponseListener(_maxBufferSize) {
             @Override
-            public boolean onHeader(Response response, HttpField field) {
-                HttpHeader header = field.getHeader();
-                if (header != null && (header == HttpHeader.SET_COOKIE || header == HttpHeader.SET_COOKIE2)) {
-                    // We do not allow cookies to be handled by HttpClient, since one
-                    // HttpClient instance is shared by multiple BayeuxClient instances.
-                    // Instead, we store the cookies in the BayeuxClient instance.
-                    Map<String, List<String>> cookies = new HashMap<>(1);
-                    cookies.put(field.getName(), Collections.singletonList(field.getValue()));
-                    storeCookies(uri, cookies);
-                    return false;
+            public void onHeaders(Response response) {
+                super.onHeaders(response);
+                for (HttpField field : response.getHeaders()) {
+                    HttpHeader header = field.getHeader();
+                    if (header != null && (header == HttpHeader.SET_COOKIE || header == HttpHeader.SET_COOKIE2)) {
+                        // We do not allow cookies to be handled by HttpClient, since one
+                        // HttpClient instance is shared by multiple BayeuxClient instances.
+                        // Instead, we store the cookies in the BayeuxClient instance.
+                        Map<String, List<String>> cookies = new HashMap<>(1);
+                        cookies.put(field.getName(), Collections.singletonList(field.getValue()));
+                        storeCookies(uri, cookies);
+                    }
                 }
-                return true;
             }
 
             private void storeCookies(URI uri, Map<String, List<String>> cookies) {
