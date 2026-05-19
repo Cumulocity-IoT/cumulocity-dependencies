@@ -22,6 +22,7 @@
 
     <modules>
         <module>parent</module>
+        <module>cometd-java-client</module>
         <module>cometd-java-server</module>
         <module>cometd-java-websocket-javax-server</module>
         <module>kubernetes-client</module>
@@ -376,7 +377,49 @@
             </dependency>
             <dependency>
                 <groupId>org.cometd.java</groupId>
+                <artifactId>bayeux-api</artifactId>
+                <version>${cometd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
+                <artifactId>cometd-java-client</artifactId>
+                <version>${cometd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
+                <artifactId>cometd-java-common</artifactId>
+                <version>${cometd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
                 <artifactId>cometd-java-server</artifactId>
+                <version>${cometd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
+                <artifactId>cometd-java-websocket-common-client</artifactId>
+                <version>${cometd.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.cometd.java</groupId>
+                        <artifactId>cometd-java-client</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
+                <artifactId>cometd-java-websocket-common-server</artifactId>
+                <version>${cometd.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.cometd.java</groupId>
+                        <artifactId>cometd-java-server</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.cometd.java</groupId>
+                <artifactId>cometd-java-websocket-javax-client</artifactId>
                 <version>${cometd.version}</version>
             </dependency>
             <dependency>
@@ -391,6 +434,11 @@
             </dependency>
 
             <!-- CHILD MODULES -->
+            <dependency>
+                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+                <artifactId>cometd-java-client</artifactId>
+                <version>${osgi.cometd.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-server</artifactId>
