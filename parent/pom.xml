@@ -60,6 +60,7 @@
                                         <exclude>org.apache.olingo:olingo-odata2-core</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:olingo-odata2-core -->
                                         <exclude>org.apache.pulsar:pulsar-client-original</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:pulsar-client-original -->
                                         <exclude>org.bouncycastle:*-jdk15on</exclude> <!-- use: org.bouncycastle:*-jdk18on -->
+                                        <exclude>org.cometd.java:cometd-java-client</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-client -->
                                         <exclude>org.cometd.java:cometd-java-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-server -->
                                         <exclude>org.cometd.java:cometd-java-websocket-javax-server</exclude> <!-- use: com.nsn.cumulocity.dependencies.osgi:cometd-java-websocket-javax-server -->
                                         <exclude>org.slf4j:*:[1,2)</exclude> <!-- use SLF4j 2 -->
@@ -70,6 +71,7 @@
                                         <include>org.apache.olingo:olingo-odata2-api:provided</include>
                                         <include>org.apache.olingo:olingo-odata2-core:provided</include>
                                         <include>org.apache.pulsar:pulsar-client-original:provided</include>
+                                        <include>org.cometd.java:cometd-java-client:provided</include>
                                         <include>org.cometd.java:cometd-java-server:provided</include>
                                         <include>org.cometd.java:cometd-java-websocket-javax-server:provided</include>
                                     </includes>
