@@ -1,10 +1,12 @@
 * @Cumulocity-IoT/c8y-core-platform-services @Cumulocity-IoT/c8y-data-at-rest
+/cometd-java-client/ @Cumulocity-IoT/c8y-data-in-motion
 /cometd-java-server/ @Cumulocity-IoT/c8y-data-in-motion
+/cometd-java-websocket-javax-client/ @Cumulocity-IoT/c8y-data-in-motion
 /cometd-java-websocket-javax-server/ @Cumulocity-IoT/c8y-data-in-motion
 /kubernetes-client/ @Cumulocity-IoT/c8y-core-platform-services
 /olingo-odata2-api/ @Cumulocity-IoT/c8y-data-at-rest
 /olingo-odata2-core/ @Cumulocity-IoT/c8y-data-at-rest
+/parent/ @Cumulocity-IoT/c8y-core-platform-services @Cumulocity-IoT/c8y-data-at-rest
 /pulsar-client-original/ @Cumulocity-IoT/c8y-data-in-motion
 /pulsar-common/ @Cumulocity-IoT/c8y-data-in-motion
-/spring-dm/ @Cumulocity-IoT/c8y-core-platform-services @Cumulocity-IoT/c8y-data-at-rest
 /svenson/ @Cumulocity-IoT/c8y-data-at-rest

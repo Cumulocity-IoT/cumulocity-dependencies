@@ -24,6 +24,7 @@
         <module>parent</module>
         <module>cometd-java-client</module>
         <module>cometd-java-server</module>
+        <module>cometd-java-websocket-javax-client</module>
         <module>cometd-java-websocket-javax-server</module>
         <module>kubernetes-client</module>
         <module>olingo-odata2-api</module>
@@ -442,6 +443,11 @@
             <dependency>
                 <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
                 <artifactId>cometd-java-server</artifactId>
+                <version>${osgi.cometd.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nsn.cumulocity.dependencies.osgi</groupId>
+                <artifactId>cometd-java-websocket-javax-client</artifactId>
                 <version>${osgi.cometd.version}</version>
             </dependency>
             <dependency>
