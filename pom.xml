@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.12</version>
+        <version>3.3.13</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -68,7 +68,6 @@
         <joda-time.version>2.14.2</joda-time.version>
         <json-path.version>2.8.0</json-path.version> <!-- overridden down -->
         <kubernetes-client.version>7.3.1</kubernetes-client.version>
-        <netty.version>4.1.121.Final</netty.version> <!-- overridden up -->
         <odata.version>2.0.13</odata.version>
         <okhttp.version>3.12.12</okhttp.version> <!-- overridden down -->
         <protobuf.version>4.35.1</protobuf.version>
@@ -77,10 +76,6 @@
         <sun-activation.version>1.2.2</sun-activation.version>
         <sundr.version>0.200.4</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.1</svenson.version>
-        <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version> <!-- overridden down -->
-
-        <!-- PROVIDED DEPENDENCIES -->
-        <lombok.version>1.18.38</lombok.version> <!-- overridden up -->
 
         <!-- CHILD MODULES VERSIONS -->
         <osgi.cometd.version>${cometd.version}-${cumulocity-dependencies.version}</osgi.cometd.version>
@@ -560,11 +555,6 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-dependency-plugin</artifactId>
                     <version>3.11.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.4</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
