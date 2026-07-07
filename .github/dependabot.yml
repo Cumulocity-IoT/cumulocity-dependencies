@@ -29,10 +29,12 @@ updates:
       - "c8y-public"
     open-pull-requests-limit: 20
     ignore:
+      - dependency-name: "org.apache.pulsar:*"
+        versions: [ ">=3.0.0" ]
       - dependency-name: "org.cometd.java:*" # Frozen due to heavy modifications
       - dependency-name: "org.eclipse.jetty:*"
-        versions: [ ">=10.0.0" ] # Requires websockets API migration
+        versions: [ ">=12.1.0" ]
       - dependency-name: "org.springframework:*"
-        versions: [ ">=6.0.0" ] # Requires Jakarta migration
+        versions: [ ">=7.0.0" ]
       - dependency-name: "org.springframework.boot:*"
-        versions: [ ">=3.0.0" ] # Requires Jakarta migration
+        versions: [ ">=4.0.0" ]
