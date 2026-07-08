@@ -79,7 +79,7 @@
         <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version> <!-- overridden down -->
 
         <!-- PROVIDED DEPENDENCIES -->
-        <checkerframework.version>3.33.0</checkerframework.version>
+        <checkerframework.version>4.2.1</checkerframework.version>
         <lombok.version>1.18.38</lombok.version> <!-- overridden up -->
 
         <!-- CHILD MODULES VERSIONS -->
