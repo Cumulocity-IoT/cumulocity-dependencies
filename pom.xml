@@ -71,7 +71,7 @@
         <odata.version>2.0.13</odata.version>
         <okhttp.version>3.12.12</okhttp.version> <!-- overridden down -->
         <protobuf.version>4.35.1</protobuf.version>
-        <pulsar-client.version>2.8.4</pulsar-client.version> <!-- overridden down -->
+        <pulsar-client.version>2.11.1</pulsar-client.version> <!-- overridden down -->
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound --> <!-- overridden down -->
         <sun-activation.version>1.2.2</sun-activation.version>
         <sundr.version>0.200.4</sundr.version> <!-- kubernetes-client.version bound -->
@@ -79,6 +79,7 @@
         <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version> <!-- overridden down -->
 
         <!-- PROVIDED DEPENDENCIES -->
+        <checkerframework.version>3.33.0</checkerframework.version>
         <lombok.version>1.18.38</lombok.version> <!-- overridden up -->
 
         <!-- CHILD MODULES VERSIONS -->
@@ -375,6 +376,11 @@
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-ext-jdk18on</artifactId>
                 <version>${bouncycastle.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.checkerframework</groupId>
+                <artifactId>checker-qual</artifactId>
+                <version>${checkerframework.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.cometd.java</groupId>
