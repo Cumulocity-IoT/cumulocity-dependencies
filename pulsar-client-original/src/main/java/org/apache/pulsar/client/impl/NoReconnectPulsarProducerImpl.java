@@ -7,7 +7,6 @@ import org.apache.pulsar.client.impl.conf.ProducerConfigurationData;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 @Slf4j
@@ -31,9 +30,8 @@ public class NoReconnectPulsarProducerImpl<T> extends ProducerImpl<T> {
                                          ProducerConfigurationData conf,
                                          CompletableFuture<Producer<T>> producerCreatedFuture,
                                          int partitionIndex, Schema<T> schema,
-                                         ProducerInterceptors interceptors,
-                                         Optional<String> overrideProducerName) {
-        super(client, topic, conf, producerCreatedFuture, partitionIndex, schema, interceptors, overrideProducerName);
+                                         ProducerInterceptors interceptors) {
+        super(client, topic, conf, producerCreatedFuture, partitionIndex, schema, interceptors);
     }
 
     @Override
