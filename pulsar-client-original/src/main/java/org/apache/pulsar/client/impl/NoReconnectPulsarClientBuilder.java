@@ -23,6 +23,10 @@ public class NoReconnectPulsarClientBuilder extends ClientBuilderImpl {
         // NOTE: the method's implementation is the same as in superclass,
         // except client object that is being built is of class NoReconnectPulsarClientImpl
 
+        // Restore pulsar-client 2.8.4's disabled (0) client-side memory limit: 2.10.x defaults
+        // this to 64 MiB enabled
+        this.memoryLimit(0, SizeUnit.BYTES);
+
         if (StringUtils.isBlank(conf.getServiceUrl()) && conf.getServiceUrlProvider() == null) {
             throw new IllegalArgumentException("service URL or service URL provider needs to be specified on the ClientBuilder object.");
         }
