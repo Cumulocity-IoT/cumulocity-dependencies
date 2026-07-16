@@ -6,6 +6,7 @@ import org.apache.pulsar.client.api.Schema;
 import org.apache.pulsar.client.impl.conf.ClientConfigurationData;
 import org.apache.pulsar.client.impl.conf.ProducerConfigurationData;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class NoReconnectPulsarClientImpl extends PulsarClientImpl {
@@ -14,17 +15,20 @@ public class NoReconnectPulsarClientImpl extends PulsarClientImpl {
         super(conf);
     }
 
+    @Override
     protected <T> ProducerImpl<T> newProducerImpl(String topic, int partitionIndex,
                                                   ProducerConfigurationData conf,
                                                   Schema<T> schema,
                                                   ProducerInterceptors interceptors,
-                                                  CompletableFuture<Producer<T>> producerCreatedFuture) {
+                                                  CompletableFuture<Producer<T>> producerCreatedFuture,
+                                                  Optional<String> overrideProducerName) {
         return new NoReconnectPulsarProducerImpl<>(NoReconnectPulsarClientImpl.this,
                 topic,
                 conf,
                 producerCreatedFuture,
                 partitionIndex,
                 schema,
-                interceptors);
+                interceptors,
+                overrideProducerName);
     }
 }
