@@ -47,6 +47,7 @@
         <aircompressor.version>2.0.2</aircompressor.version>
         <avro.version>1.12.0</avro.version>
         <bouncycastle.version>1.78.1</bouncycastle.version>
+        <checker-qual.version>3.49.2</checker-qual.version> <!-- pulsar-client.version bound -->
         <cometd.version>3.0.10</cometd.version>
         <commons-beanutils.version>1.11.0</commons-beanutils.version>
         <commons-codec.version>1.18.0</commons-codec.version>
@@ -68,7 +69,7 @@
         <odata.version>2.0.13</odata.version>
         <okhttp.version>3.12.12</okhttp.version>
         <protobuf.version>4.33.1</protobuf.version>
-        <pulsar-client.version>2.8.4</pulsar-client.version>
+        <pulsar-client.version>2.10.4</pulsar-client.version>
         <rs-api.version>2.1.6</rs-api.version>
         <servlet-api.version>3.1.0</servlet-api.version>
         <slf4j.version>1.7.36</slf4j.version>
