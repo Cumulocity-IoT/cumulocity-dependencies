@@ -38,3 +38,5 @@ updates:
         versions: [ ">=7.0.0" ]
       - dependency-name: "org.springframework.boot:*"
         versions: [ ">=4.0.0" ]
+      - dependency-name: "org.junit:*"
+        versions: [ ">=6.0.0" ]
