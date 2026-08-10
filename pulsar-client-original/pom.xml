@@ -77,6 +77,11 @@
                     <groupId>com.sun.activation</groupId>
                     <artifactId>javax.activation</artifactId>
                 </exclusion>
+                <!-- declared below, on the version managed by the imported pulsar pom -->
+                <exclusion>
+                    <groupId>com.typesafe.netty</groupId>
+                    <artifactId>netty-reactive-streams</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
