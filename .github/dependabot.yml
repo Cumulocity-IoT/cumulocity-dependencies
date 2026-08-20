@@ -29,6 +29,8 @@ updates:
       - "c8y-public"
     open-pull-requests-limit: 20
     ignore:
+      - dependency-name: "com.squareup.okhttp3:*"
+        versions: [ ">=5.0.0" ]
       - dependency-name: "org.apache.pulsar:*"
         versions: [ ">=3.0.0" ]
       - dependency-name: "org.cometd.java:*" # Frozen due to heavy modifications
