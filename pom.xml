@@ -70,7 +70,7 @@
         <pulsar-client.version>2.10.4</pulsar-client.version> <!-- overridden down -->
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound --> <!-- overridden down -->
         <sun-activation.version>1.2.2</sun-activation.version>
-        <sundr.version>0.200.4</sundr.version> <!-- kubernetes-client.version bound -->
+        <sundr.version>0.300.0</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.1</svenson.version>
 
         <!-- CHILD MODULES VERSIONS -->
