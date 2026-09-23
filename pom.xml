@@ -48,7 +48,7 @@
 
         <!-- COMPILE DEPENDENCIES VERSIONS -->
         <aircompressor.version>2.0.3</aircompressor.version>
-        <asynchttpclient.version>2.12.4</asynchttpclient.version> <!-- pulsar-client.version bound; pinned above Pulsar's 2.12.1 for CVE-2024-53990 -->
+        <asynchttpclient.version>3.0.13</asynchttpclient.version> <!-- pulsar-client.version bound; pinned above Pulsar's 2.12.1 for CVE-2024-53990 -->
         <avro.version>1.12.1</avro.version>
         <bouncycastle.version>1.85</bouncycastle.version>
         <checker-qual.version>3.49.2</checker-qual.version> <!-- pulsar-client.version bound -->
