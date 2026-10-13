@@ -31,6 +31,8 @@ updates:
     ignore:
       - dependency-name: "com.squareup.okhttp3:*"
         versions: [ ">=5.0.0" ]
+      - dependency-name: "io.fabric8:*"
+        versions: [ ">=8.0.0" ] # Requires Jackson 3 and OkHttp 5
       - dependency-name: "org.apache.pulsar:*"
         versions: [ ">=3.0.0" ]
       - dependency-name: "org.cometd.java:*" # Frozen due to heavy modifications
