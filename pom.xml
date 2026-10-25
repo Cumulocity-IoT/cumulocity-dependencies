@@ -58,7 +58,7 @@
         <commons-compress.version>1.28.0</commons-compress.version>
         <commons-configuration.version>1.10</commons-configuration.version>
         <commons-io.version>2.22.0</commons-io.version>
-        <errorprone.version>2.50.0</errorprone.version> <!-- guava.version & caffeine.version bound -->
+        <errorprone.version>2.51.0</errorprone.version> <!-- guava.version & caffeine.version bound -->
         <guava.version>33.7.1-jre</guava.version>
         <hk2.version>2.6.1</hk2.version> <!-- pulsar-client.version bound -->
         <javassist.version>3.33.0-GA</javassist.version>
