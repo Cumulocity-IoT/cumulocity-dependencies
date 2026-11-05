@@ -1,0 +1,5 @@
+{
+  "prWorkflow": "PreMerge",
+  "testCheck": "MavenBuild",
+  "consumer": {"repo": "Cumulocity-IoT/cumulocity-core"}
+}
