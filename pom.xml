@@ -69,7 +69,7 @@
         <protobuf.version>4.36.2</protobuf.version>
         <pulsar-client.version>2.10.4</pulsar-client.version> <!-- overridden down -->
         <snakeyaml.version>1.33</snakeyaml.version> <!-- cxf.version bound --> <!-- overridden down -->
-        <sun-activation.version>1.2.2</sun-activation.version>
+        <sun-activation.version>2.0.1</sun-activation.version>
         <sundr.version>0.200.4</sundr.version> <!-- kubernetes-client.version bound -->
         <svenson.version>1.6.2</svenson.version>
 
