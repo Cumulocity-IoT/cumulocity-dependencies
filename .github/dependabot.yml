@@ -31,6 +31,8 @@ updates:
     ignore:
       - dependency-name: "com.squareup.okhttp3:*"
         versions: [ ">=5.0.0" ]
+      - dependency-name: "com.sun.activation:jakarta.activation"
+        versions: [ ">=2.0.0" ] # 2.x moves to the jakarta.activation package; async-http-client 2.x (Pulsar 2.x) needs javax.activation
       - dependency-name: "io.fabric8:*"
         versions: [ ">=8.0.0" ] # Requires Jackson 3 and OkHttp 5
       - dependency-name: "org.apache.maven:apache-maven"
