@@ -37,6 +37,8 @@ updates:
         versions: [ ">=3.10.0" ] # Release deploy to CodeArtifact fails with HTTP 400
       - dependency-name: "org.apache.pulsar:*"
         versions: [ ">=3.0.0" ]
+      - dependency-name: "org.asynchttpclient:*"
+        versions: [ ">=3.0.0" ] # Pulsar 2.x client sources need the AHC 2 int timeout API; Pulsar uses AHC 3 from 5.0.0
       - dependency-name: "org.cometd.java:*" # Frozen due to heavy modifications
       - dependency-name: "org.eclipse.jetty:*"
         versions: [ ">=12.1.0" ]
