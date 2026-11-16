@@ -144,6 +144,7 @@
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
             <version>${checker-qual.version}</version>
+            <optional>true</optional> <!-- annotations only, relevant at compile time -->
         </dependency>
         <dependency>
             <groupId>org.javassist</groupId>
